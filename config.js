@@ -9,9 +9,9 @@ window.GITE_CONFIG = {
   baseGuests: 4,
   baseNightlyRate: 150,
   // À compléter dès que le supplément est fixé. Exemple : 25 = +25 € par adulte supplémentaire et par nuit.
-  extraAdultNightly: null,
+  extraAdultNightly: 15,
   depositPercent: 30,
-  securityDeposit: 390,
+  securityDeposit: 450,
   cleaningFeeIfNeeded: 120,
   checkIn: "16h00 – 20h00",
   checkOut: "09h00 – 11h00",

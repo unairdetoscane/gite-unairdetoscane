@@ -85,7 +85,7 @@
         <div>
           <div class="eyebrow light">Tarifs & disponibilités</div>
           <h2>Choisissez vos dates</h2>
-          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 adultes</strong>, pour un séjour de 2 nuits minimum. Le tarif est majoré pour 5 ou 6 adultes. Les enfants ne sont pas admis.</p>
+          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 adultes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 adultes, ajoutez 15 € par adulte supplémentaire et par nuit. Les enfants ne sont pas admis.</p>
           <div class="date-search">
             <label>Arrivée<input id="arrival" type="date"></label>
             <label>Départ<input id="departure" type="date"></label>
@@ -94,7 +94,7 @@
           </div>
           <div id="availabilityResult" class="availability-result" aria-live="polite"></div>
           <div class="conditions-grid">
-            <div><span>Acompte</span><b>30 %</b></div><div><span>Caution</span><b>390 €</b></div><div><span>Arrivée</span><b>16h–20h</b></div><div><span>Départ</span><b>9h–11h</b></div>
+            <div><span>Acompte</span><b>30 %</b></div><div><span>Caution</span><b>450 €</b></div><div><span>Arrivée</span><b>16h–20h</b></div><div><span>Départ</span><b>9h–11h</b></div>
           </div>
           <p class="micro">Adultes uniquement · enfants non admis · ménage à la charge du locataire, sinon 120 € retenus sur la caution · animaux non admis · logement non-fumeur · fêtes non autorisées.</p>
         </div>
@@ -136,6 +136,7 @@
           <label>E-mail<input name="email" type="email" required></label>
           <div class="form-row"><label>Arrivée<input name="arrival" type="date" required></label><label>Départ<input name="departure" type="date" required></label></div>
           <div class="form-row"><label>Nombre d’adultes<select name="adults" required><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><div class="adult-only-note"><strong>Adultes uniquement</strong><span>Les enfants ne sont pas admis dans le gîte.</span></div></div>
+          <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour.</div>
           <label>Votre message<textarea name="message" rows="4" placeholder="Une question ou une demande particulière ?"></textarea></label>
           <button class="btn primary full" type="submit">Envoyer ma demande par e-mail</button>
           <p id="formStatus" class="form-status">Votre messagerie s’ouvrira avec la demande préremplie à destination du gîte.</p>

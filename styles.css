@@ -12,3 +12,10 @@
 .legal-grid h3{margin-top:0}
 .legal-grid a{text-decoration:underline}
 @media(max-width:760px){.legal-grid{grid-template-columns:1fr}.gallery-real figure{min-height:220px}}
+
+/* Correctifs galerie et estimation tarifaire */
+.gallery-real figure{margin:0!important;min-height:0!important;height:100%;align-self:stretch}
+.gallery-real figure img{min-width:0;min-height:0}
+.form-price-preview{margin:4px 0 16px;padding:13px 14px;border-radius:10px;background:var(--cream);border:1px solid var(--line);font-size:.9rem;font-weight:650;color:var(--deep)}
+@media(max-width:900px){.gallery{grid-auto-rows:250px}.gallery-real figure{height:100%}}
+@media(max-width:600px){.gallery{grid-auto-rows:240px}.gallery-real figure{height:240px!important}}

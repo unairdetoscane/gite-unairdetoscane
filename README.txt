@@ -79,3 +79,8 @@ SÉCURITÉ
 --------
 Ne jamais mettre le lien iCal Booking dans config.js, index.html ou README.txt.
 Ne jamais publier ce lien dans le dépôt. Utiliser uniquement le secret BOOKING_ICAL_URL.
+
+
+V4.3 — Correction affichage Booking
+----------------------------------
+Le site lit désormais availability.json directement depuis le dépôt GitHub public. Cela évite le décalage éventuel entre la mise à jour du fichier par GitHub Actions et le redéploiement de GitHub Pages. Les nuits réservées apparaissent en terracotta dans le calendrier et sont refusées par le vérificateur de dates.

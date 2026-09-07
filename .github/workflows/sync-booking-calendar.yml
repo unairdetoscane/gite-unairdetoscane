@@ -1,0 +1,38 @@
+name: Synchroniser le calendrier Booking
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-calendar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le site
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Télécharger le calendrier Booking et générer availability.json
+        env:
+          BOOKING_ICAL_URL: ${{ secrets.BOOKING_ICAL_URL }}
+        run: python tools/update_booking_calendar.py
+
+      - name: Enregistrer la mise à jour si le planning a changé
+        run: |
+          if git diff --quiet -- availability.json; then
+            echo "Aucun changement de planning."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add availability.json
+          git commit -m "Mise à jour automatique du calendrier Booking"
+          git push

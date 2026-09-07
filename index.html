@@ -85,12 +85,12 @@
         <div>
           <div class="eyebrow light">Tarifs & disponibilités</div>
           <h2>Choisissez vos dates</h2>
-          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 adultes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 adultes, ajoutez 15 € par adulte supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.</strong></p>
+          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 personnes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 personnes, ajoutez 15 € par personne supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.</strong></p>
           <div class="date-search">
             <label>Arrivée<input id="arrival" type="date"></label>
             <label>Départ<input id="departure" type="date"></label>
-            <label>Adultes<select id="guestCount" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
-            <label>Enfants<select id="childCount"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+            <label class="guest-select-field">Adultes<select id="guestCount" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
+            <label class="guest-select-field">Enfants<select id="childCount"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
             <button class="btn primary" id="checkDates" type="button">Vérifier</button>
             <a class="btn reserve-jump" id="reserveJump" href="#reserver">Réserver</a>
           </div>
@@ -140,7 +140,7 @@
           <div class="form-row"><label>Arrivée<input name="arrival" type="date" required></label><label>Départ<input name="departure" type="date" required></label></div>
           <div class="form-row"><label>Nombre d’adultes<select name="adults" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label><label>Nombre d’enfants<select name="children" id="formChildCount"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label></div>
           <div id="childAgesForm" class="child-ages child-ages-form" aria-live="polite"></div>
-          <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.</div>
+          <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre de personnes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.</div>
           <label>Votre message<textarea name="message" rows="4" placeholder="Une question ou une demande particulière ?"></textarea></label>
           <input type="hidden" name="_subject" value="Demande de réservation – Un air de Toscane">
           <input type="hidden" name="montant_sejour" id="formTotalField" value="">

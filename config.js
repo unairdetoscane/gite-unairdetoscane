@@ -8,8 +8,8 @@ window.GITE_CONFIG = {
   adultsOnly: false,
   baseGuests: 4,
   baseNightlyRate: 150,
-  // À compléter dès que le supplément est fixé. Exemple : 25 = +25 € par adulte supplémentaire et par nuit.
-  extraAdultNightly: 15,
+  // Supplément par personne au-delà de 4 personnes, adultes et enfants confondus.
+  extraPersonNightly: 15,
   depositPercent: 30,
   securityDeposit: 450,
   cleaningFeeIfNeeded: 120,

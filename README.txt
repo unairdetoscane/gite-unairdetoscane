@@ -3,8 +3,8 @@ GÎTE UN AIR DE TOSCANE — V4.2 GITHUB PAGES
 
 Cette version conserve le visuel et le contenu de la V4.1, avec :
 - formulaire Formspree ;
-- tarif automatique : 150 €/nuit jusqu'à 4 adultes ;
-- +15 €/adulte supplémentaire/nuit pour 5 ou 6 adultes ;
+- tarif automatique : 150 €/nuit jusqu'à 4 personnes ;
+- +15 €/personne supplémentaire/nuit au-delà de 4 personnes, adultes et enfants confondus ;
 - caution : 450 € ;
 - enfants admis ;
 - mentions légales sur une page séparée ;
@@ -91,3 +91,5 @@ V4.4 — Mise à jour familles
 - Capacité contrôlée à 6 personnes au total.
 - Bouton Réserver à côté de Vérifier : il recopie les dates et occupants vers le formulaire.
 - Taxe de séjour indiquée en supplément, à régler sur place.
+
+V4.5 : correction visuelle des listes Adultes et Enfants : la valeur sélectionnée reste visible.

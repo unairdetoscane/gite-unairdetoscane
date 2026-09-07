@@ -56,3 +56,11 @@
 @media(max-width:1050px){.date-search{grid-template-columns:1fr 1fr 1fr 1fr}.date-search .btn,.date-search .reserve-jump{width:100%}.date-search #checkDates{grid-column:span 2}.date-search .reserve-jump{grid-column:span 2}.conditions-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:700px){.date-search{grid-template-columns:1fr 1fr}.date-search #checkDates,.date-search .reserve-jump{grid-column:auto}.child-ages{grid-template-columns:1fr 1fr}.conditions-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.date-search{grid-template-columns:1fr}.date-search #checkDates,.date-search .reserve-jump{grid-column:auto}.child-ages{grid-template-columns:1fr}.conditions-grid{grid-template-columns:1fr 1fr}}
+
+/* V4.5 : lisibilité des sélecteurs Adultes / Enfants */
+.date-search{grid-template-columns:1fr 1fr minmax(92px,.82fr) minmax(92px,.82fr) auto auto}
+.date-search .guest-select-field{min-width:92px}
+.date-search .guest-select-field select{min-width:92px;padding-left:14px;padding-right:30px;color:var(--ink);background-color:#fff;font-weight:600}
+@media(max-width:1050px){.date-search{grid-template-columns:1fr 1fr minmax(110px,1fr) minmax(110px,1fr)}}
+@media(max-width:700px){.date-search{grid-template-columns:1fr 1fr}.date-search .guest-select-field{min-width:0}.date-search .guest-select-field select{min-width:0}}
+@media(max-width:480px){.date-search{grid-template-columns:1fr}.date-search .guest-select-field{min-width:0}}

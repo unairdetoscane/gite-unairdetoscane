@@ -13,7 +13,7 @@ function iso(d){return d.toISOString().slice(0,10)}
 function inRange(date,r){return date>=new Date(r.from+'T00:00:00')&&date<new Date(r.to+'T00:00:00')}
 function isBooked(d){return activeBookedRanges.some(r=>inRange(d,r))}
 let view=new Date();view=new Date(view.getFullYear(),view.getMonth(),1);const months=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-function renderCalendar(){const cal=document.getElementById('calendar');cal.innerHTML='';document.getElementById('calendarTitle').textContent=`${months[view.getMonth()]} ${view.getFullYear()}`;const first=(view.getDay()+6)%7;const start=new Date(view.getFullYear(),view.getMonth(),1-first);const today=new Date();today.setHours(0,0,0,0);for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const el=document.createElement('div');el.className='day';if(d.getMonth()!==view.getMonth())el.classList.add('other');if(isBooked(d))el.classList.add('booked');if(d.getTime()===today.getTime())el.classList.add('today');el.textContent=d.getDate();el.title=isBooked(d)?'Réservé':`${cfg.baseNightlyRate} € / nuit jusqu’à ${cfg.baseGuests} adultes`;cal.appendChild(el)}}
+function renderCalendar(){const cal=document.getElementById('calendar');cal.innerHTML='';document.getElementById('calendarTitle').textContent=`${months[view.getMonth()]} ${view.getFullYear()}`;const first=(view.getDay()+6)%7;const start=new Date(view.getFullYear(),view.getMonth(),1-first);const today=new Date();today.setHours(0,0,0,0);for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const el=document.createElement('div');el.className='day';if(d.getMonth()!==view.getMonth())el.classList.add('other');if(isBooked(d))el.classList.add('booked');if(d.getTime()===today.getTime())el.classList.add('today');el.textContent=d.getDate();el.title=isBooked(d)?'Réservé':`${cfg.baseNightlyRate} € / nuit jusqu’à ${cfg.baseGuests} personnes`;cal.appendChild(el)}}
 renderCalendar();
 async function loadBookingAvailability(){
   // Le workflow GitHub met bien availability.json à jour dans le dépôt, mais un commit
@@ -61,7 +61,7 @@ document.getElementById('prevMonth').onclick=()=>{view=new Date(view.getFullYear
 document.getElementById('nextMonth').onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);renderCalendar()};
 function nights(a,b){return Math.round((b-a)/86400000)}
 function datesOverlap(a,b){for(const r of activeBookedRanges){const rf=new Date(r.from+'T00:00:00'),rt=new Date(r.to+'T00:00:00');if(a<rt&&b>rf)return true}return false}
-function priceEstimate(a,b,guests){const n=nights(a,b);let nightly=cfg.baseNightlyRate;if(guests>cfg.baseGuests){if(cfg.extraAdultNightly==null)return {total:null,nightly,needsSupplement:true,nights:n};nightly+=(guests-cfg.baseGuests)*cfg.extraAdultNightly}return {total:nightly*n,nightly,needsSupplement:false,nights:n}}
+function priceEstimate(a,b,people){const n=nights(a,b);let nightly=cfg.baseNightlyRate;const extra=cfg.extraPersonNightly ?? cfg.extraAdultNightly ?? 15;if(people>cfg.baseGuests)nightly+=(people-cfg.baseGuests)*extra;return {total:nightly*n,nightly,needsSupplement:false,nights:n}}
 
 function ageOptions(){
   let html='<option value="" selected>Âge</option><option value="0">Moins d\'1 an</option>';
@@ -112,7 +112,7 @@ document.getElementById('checkDates').onclick=()=>{
   const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);
   if(n<cfg.minNights){res.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}
   if(datesOverlap(a,b)){res.textContent='Certaines dates sont déjà réservées. Choisissez une autre période.';return}
-  const p=priceEstimate(a,b,guests);
+  const p=priceEstimate(a,b,guests+children);
   res.textContent=`Période disponible : ${n} nuit${n>1?'s':''} × ${p.nightly} € / nuit = ${p.total} € pour ${guestSummary(guests,children)}. Taxe de séjour en supplément, à régler sur place.`;
   syncTopToForm();updateFormPrice();
 };
@@ -129,15 +129,15 @@ function updateFormPrice(){
   if(!preview)return;
   const av=form.querySelector('[name="arrival"]').value,de=form.querySelector('[name="departure"]').value;
   const adults=Number(form.querySelector('[name="adults"]').value),children=Number(form.querySelector('[name="children"]').value);
-  if(!adults){preview.textContent='Sélectionnez le nombre d’adultes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
+  if(!adults){preview.textContent='Sélectionnez au moins un adulte pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
   if(!totalCapacityOK(adults,children)){preview.textContent=`La capacité maximale du gîte est de ${cfg.maxGuests} personnes au total.`;if(totalField)totalField.value='';return}
   if(children&&!childrenAreComplete('childAgesForm',children)){preview.textContent='Renseignez l’âge de chaque enfant. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
   if(!av||!de){preview.textContent='Sélectionnez vos dates pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
   const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);
   if(n<=0){preview.textContent='La date de départ doit être postérieure à la date d’arrivée.';if(totalField)totalField.value='';return}
   if(n<cfg.minNights){preview.textContent=`Séjour minimum : ${cfg.minNights} nuits.`;if(totalField)totalField.value='';return}
-  const p=priceEstimate(a,b,adults);
-  const supplement=adults>cfg.baseGuests?` (${cfg.baseNightlyRate} € + ${(adults-cfg.baseGuests)*cfg.extraAdultNightly} € de supplément par nuit)`:'';
+  const p=priceEstimate(a,b,adults+children);
+  const people=adults+children;const extra=cfg.extraPersonNightly ?? cfg.extraAdultNightly ?? 15;const supplement=people>cfg.baseGuests?` (${cfg.baseNightlyRate} € + ${(people-cfg.baseGuests)*extra} € de supplément par nuit pour ${people-cfg.baseGuests} personne${people-cfg.baseGuests>1?'s':''} supplémentaire${people-cfg.baseGuests>1?'s':''})`:'';
   preview.textContent=`Montant du séjour : ${n} nuit${n>1?'s':''} × ${p.nightly} € = ${p.total} €${supplement}. ${guestSummary(adults,children)}. Taxe de séjour en supplément, à régler sur place.`;
   if(totalField)totalField.value=`${p.total} € (${n} nuit${n>1?'s':''} à ${p.nightly} €/nuit, ${guestSummary(adults,children)}) — taxe de séjour en supplément`;
 }
@@ -159,7 +159,7 @@ form.addEventListener('submit',async e=>{
   const a=new Date(arrival+'T00:00:00'),b=new Date(departure+'T00:00:00'),n=nights(a,b);
   if(n<cfg.minNights){status.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}
   if(datesOverlap(a,b)){status.textContent='Ces dates comprennent une période déjà réservée.';return}
-  const p=priceEstimate(a,b,adults);
+  const p=priceEstimate(a,b,adults+children);
   d.set('montant_sejour',`${p.total} € — ${n} nuit${n>1?'s':''} × ${p.nightly} €/nuit — ${guestSummary(adults,children)} — taxe de séjour en supplément`);
   d.set('tarif_nuit',`${p.nightly} €`);
   d.set('nombre_nuits',String(n));
@@ -176,7 +176,7 @@ form.addEventListener('submit',async e=>{
     form.reset();
     document.getElementById('guestCount').value='0';document.getElementById('childCount').value='0';
     renderChildAges('childAgesTop',0,false);renderChildAges('childAgesForm',0,true);
-    document.getElementById('formPricePreview').textContent='Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';
+    document.getElementById('formPricePreview').textContent='Sélectionnez vos dates et le nombre de personnes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';
     if(document.getElementById('formTotalField'))document.getElementById('formTotalField').value='';
   }catch(err){
     status.textContent='L’envoi a échoué. Vous pouvez réessayer ou nous contacter directement par téléphone.';

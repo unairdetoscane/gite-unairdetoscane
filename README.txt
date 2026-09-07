@@ -1,24 +1,28 @@
-GÎTE UN AIR DE TOSCANE — VERSION 1
+GÎTE UN AIR DE TOSCANE — V2 GITHUB PAGES
 
-Cette maquette est un site statique autonome, prêt pour un hébergement de type Cloudflare Pages.
+Version prête pour GitHub Pages.
 
-Fichiers importants :
-- index.html : contenu et structure du site
-- styles.css : apparence
-- script.js : calendrier, vérification des dates et formulaire
-- config.js : données faciles à modifier (téléphone, e-mail, tarifs, réservations)
+Fichiers à envoyer à la racine du dépôt GitHub :
+- index.html
+- styles.css
+- script.js
+- config.js
+- assets/
 
-À compléter avant mise en ligne définitive :
-1. Remplacer les emplacements photo par les photos originales.
-2. Ajouter l'adresse e-mail de réservation dans config.js.
-3. Ajouter les périodes tarifaires dans config.js.
-4. Ajouter les périodes déjà réservées dans config.js ou connecter ensuite un flux iCal.
-5. Vérifier les mentions légales et les informations de l'hébergeur avant publication.
+Configuration dans config.js :
+- Tarif de base : 150 €/nuit jusqu'à 4 adultes
+- Séjour minimum : 2 nuits
+- Enfants non admis
+- Maximum : 6 adultes
+- Adresse de réservation : pierrelouis.garnier@gmail.com
 
-Exemple de tarif dans config.js :
-{from:"2026-09-01", to:"2026-10-31", price:145, label:"Automne"}
+IMPORTANT : le montant du supplément pour le 5e et le 6e adulte n'a pas été inventé.
+Renseigner extraAdultNightly dans config.js dès que le montant est fixé.
+Exemple : extraAdultNightly: 25 signifie +25 € / nuit pour chaque adulte au-delà de 4.
 
-Exemple de réservation :
-{from:"2026-09-12", to:"2026-09-15"}
-
-Le second jour (to) correspond au jour du départ et n'est donc pas marqué comme occupé.
+Pour bloquer des dates, compléter bookedRanges dans config.js :
+bookedRanges: [
+  {from:"2026-10-12", to:"2026-10-15"},
+  {from:"2026-12-24", to:"2026-12-28"}
+]
+La date "to" est la date de départ et redevient disponible.

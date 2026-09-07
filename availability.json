@@ -1,5 +1,10 @@
 {
   "source": "Booking.com iCal",
-  "updatedAt": null,
-  "bookedRanges": []
+  "updatedAt": "2026-09-07T15:40:44+00:00",
+  "bookedRanges": [
+    {
+      "from": "2026-09-11",
+      "to": "2026-09-13"
+    }
+  ]
 }

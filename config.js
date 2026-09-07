@@ -16,6 +16,8 @@ window.GITE_CONFIG = {
   checkIn: "16h00 – 20h00",
   checkOut: "09h00 – 11h00",
   cancellation: "Annulation gratuite jusqu’à 7 jours avant la date d’arrivée.",
+  // Secours manuel uniquement : ces périodes sont ajoutées à celles synchronisées depuis Booking.
+  // Exemple : { from: "2026-09-14", to: "2026-09-16" } bloque les nuits des 14 et 15 septembre.
   bookedRanges: [],
-  lastCalendarUpdate: "7 septembre 2026"
+  lastCalendarUpdate: "Synchronisation Booking en attente"
 };

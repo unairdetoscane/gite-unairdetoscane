@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Avis des voyageurs du gîte Un air de Toscane à Salles-Arbuissonnas-en-Beaujolais et formulaire pour déposer un avis.">
+  <title>Avis voyageurs | Gîte Un air de Toscane</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="Accueil">
+      <span class="brand-mark">U</span>
+      <span><strong>Un air de Toscane</strong><small>Gîte 5★ · Beaujolais</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html#gite">Le gîte</a><a href="index.html#photos">Photos</a><a href="index.html#tarifs">Tarifs & disponibilités</a><a href="index.html#beaujolais">À découvrir</a><a class="active-link" href="avis.html">Avis</a><a class="nav-cta" href="index.html#reserver">Réserver</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="subhero">
+      <div class="wrap subhero-content">
+        <div class="eyebrow light">Livre d’or</div>
+        <h1>Les avis de nos voyageurs</h1>
+        <p>Retrouvez les impressions laissées après un séjour à Un air de Toscane, ou partagez à votre tour votre expérience.</p>
+      </div>
+    </section>
+
+    <section class="section wrap reviews-page-section">
+      <div class="reviews-summary-card">
+        <div><span class="summary-score" id="reviewsPageAverage">9,5</span><span class="summary-outof">/ 10</span></div>
+        <div><strong>Exceptionnel</strong><p id="reviewsCount">2 avis publiés</p></div>
+        <a class="btn primary" href="#deposer-avis">Déposer un avis</a>
+      </div>
+      <div id="reviewsList" class="reviews-list">
+        <article class="review-full-card"><div class="review-full-score">10 / 10</div><div><h2>Parfait</h2><p>Parfait, séjour improvisé et de dernière minute pour Pâques 2023. Joli cadre, intérieur chaleureux, literie impeccable, grands placards de rangement, propreté, contacts et accueil au top.</p><footer>Françoise · Anse · avril 2023</footer></div></article>
+      </div>
+    </section>
+
+    <section class="section review-form-section" id="deposer-avis">
+      <div class="wrap review-form-grid">
+        <div>
+          <div class="eyebrow light">Votre séjour</div>
+          <h2>Déposer un avis</h2>
+          <p>Votre avis est transmis aux propriétaires du gîte. Il est relu avant publication afin d’éviter le spam et les contenus sans rapport avec un séjour réel.</p>
+          <p class="review-form-note">Votre adresse e-mail sert uniquement à identifier votre envoi et ne sera jamais affichée sur le site.</p>
+        </div>
+        <form id="reviewForm" class="request-form review-form" action="https://formspree.io/f/mkjnqvoj" method="POST">
+          <div class="form-row"><label>Nom ou prénom public<input name="nom_public" required maxlength="60" placeholder="Ex. Françoise"></label><label>Ville<input name="ville" maxlength="80" placeholder="Ex. Anse"></label></div>
+          <label>Votre e-mail<input name="email" type="email" required autocomplete="email"></label>
+          <div class="form-row"><label>Date ou période du séjour<input name="periode_sejour" maxlength="80" placeholder="Ex. août 2026"></label><label>Note sur 10<select name="note" required><option value="" selected disabled>Choisir</option><option>10</option><option>9</option><option>8</option><option>7</option><option>6</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label></div>
+          <label>Titre de l’avis<input name="titre_avis" maxlength="100" placeholder="Ex. Un excellent séjour"></label>
+          <label>Votre avis<textarea name="avis" rows="7" required minlength="15" maxlength="2000" placeholder="Partagez ce que vous avez apprécié lors de votre séjour…"></textarea></label>
+          <label class="consent-row"><input type="checkbox" name="autorisation_publication" value="Oui" required><span>J’autorise la publication de mon avis, de mon nom ou prénom public, de ma ville, de ma note et de la période de séjour sur le site Un air de Toscane.</span></label>
+          <input type="hidden" name="_subject" value="Nouvel avis – Un air de Toscane">
+          <input type="hidden" name="type_formulaire" value="Avis voyageur">
+          <button class="btn primary full" type="submit">Envoyer mon avis</button>
+          <p id="reviewFormStatus" class="form-status" aria-live="polite">L’avis sera envoyé directement au gîte puis publié après validation.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-grid"><div><strong>Un air de Toscane</strong><p>Gîte 5 étoiles à Salles-Arbuissonnas-en-Beaujolais</p></div><div><a href="index.html#gite">Le gîte</a><a href="index.html#tarifs">Tarifs</a><a href="avis.html">Avis</a><a href="index.html#reserver">Contact</a><a href="mentions-legales.html">Mentions légales</a></div><div><p>90, rue de la Croix-Rousse<br>69460 Salles-Arbuissonnas-en-Beaujolais</p></div></div><div class="wrap footer-bottom"><span>© 2026 Un air de Toscane</span><span>Site indépendant · réservation directe</span></div></footer>
+
+  <script src="avis.js"></script>
+</body>
+</html>

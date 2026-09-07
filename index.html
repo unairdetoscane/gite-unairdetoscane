@@ -16,7 +16,7 @@
     </a>
     <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     <nav class="main-nav" aria-label="Navigation principale">
-      <a href="#gite">Le gîte</a><a href="#photos">Photos</a><a href="#tarifs">Tarifs & disponibilités</a><a href="#beaujolais">À découvrir</a><a href="#avis">Avis</a><a class="nav-cta" href="#reserver">Réserver</a>
+      <a href="#gite">Le gîte</a><a href="#photos">Photos</a><a href="#tarifs">Tarifs & disponibilités</a><a href="#beaujolais">À découvrir</a><a href="avis.html">Avis</a><a class="nav-cta" href="#reserver">Réserver</a>
     </nav>
   </header>
 
@@ -85,7 +85,7 @@
         <div>
           <div class="eyebrow light">Tarifs & disponibilités</div>
           <h2>Choisissez vos dates</h2>
-          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 personnes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 personnes, ajoutez 15 € par personne supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.<br />Les chients ne sont pas admis.</strong></p>
+          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 personnes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 personnes, ajoutez 15 € par personne supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.</strong></p>
           <div class="date-search">
             <label>Arrivée<input id="arrival" type="date"></label>
             <label>Départ<input id="departure" type="date"></label>
@@ -123,11 +123,19 @@
     </section>
 
     <section class="section soft" id="avis">
-      <div class="wrap"><div class="eyebrow">Avis voyageurs</div><div class="reviews-head"><h2>9,5 / 10 <span>Exceptionnel</span></h2></div>
-        <div class="reviews">
-          <blockquote><div class="stars">★★★★★</div><p>« Joli cadre, intérieur chaleureux, literie impeccable, grands placards de rangement, propreté, contacts et accueil au top. »</p><footer>Françoise · avril 2023 · note 10/10</footer></blockquote>
-          <blockquote><div class="stars">★★★★☆</div><p>« Très bon accueil, logement fonctionnel et propre. À recommander. »</p><footer>Noëlle · octobre 2021 · note 9/10</footer></blockquote>
+      <div class="wrap">
+        <div class="reviews-title-row">
+          <div><div class="eyebrow">Avis voyageurs</div><div class="reviews-head"><h2><span id="reviewAverage">9,5</span> / 10 <span>Exceptionnel</span></h2></div></div>
+          <a class="btn secondary" href="avis.html">Voir les avis &amp; déposer le vôtre</a>
         </div>
+        <div class="review-carousel" id="reviewCarousel" aria-label="Avis voyageurs">
+          <button class="review-arrow prev" id="reviewPrev" type="button" aria-label="Avis précédent">←</button>
+          <div class="review-track" id="reviewTrack" aria-live="polite">
+            <blockquote class="review-slide active"><div class="review-score">10 / 10</div><p>« Joli cadre, intérieur chaleureux, literie impeccable, grands placards de rangement, propreté, contacts et accueil au top. »</p><footer>Françoise · Anse · avril 2023</footer></blockquote>
+          </div>
+          <button class="review-arrow next" id="reviewNext" type="button" aria-label="Avis suivant">→</button>
+        </div>
+        <div class="review-dots" id="reviewDots" aria-label="Choisir un avis"></div>
       </div>
     </section>
 
@@ -151,7 +159,7 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap footer-grid"><div><strong>Un air de Toscane</strong><p>Gîte 5 étoiles à Salles-Arbuissonnas-en-Beaujolais</p></div><div><a href="#gite">Le gîte</a><a href="#tarifs">Tarifs</a><a href="#reserver">Contact</a><a href="mentions-legales.html">Mentions légales</a></div><div><p>90, rue de la Croix-Rousse<br>69460 Salles-Arbuissonnas-en-Beaujolais</p></div></div><div class="wrap footer-bottom"><span>© 2026 Un air de Toscane</span><span>Site indépendant · réservation directe</span></div></footer>
+  <footer class="footer"><div class="wrap footer-grid"><div><strong>Un air de Toscane</strong><p>Gîte 5 étoiles à Salles-Arbuissonnas-en-Beaujolais</p></div><div><a href="#gite">Le gîte</a><a href="#tarifs">Tarifs</a><a href="avis.html">Avis</a><a href="#reserver">Contact</a><a href="mentions-legales.html">Mentions légales</a></div><div><p>90, rue de la Croix-Rousse<br>69460 Salles-Arbuissonnas-en-Beaujolais</p></div></div><div class="wrap footer-bottom"><span>© 2026 Un air de Toscane</span><span>Site indépendant · réservation directe</span></div></footer>
 
   <script src="config.js"></script><script src="script.js"></script>
 </body>

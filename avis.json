@@ -1,0 +1,20 @@
+{
+  "reviews": [
+    {
+      "score": 10,
+      "title": "Parfait",
+      "name": "Françoise",
+      "city": "Anse",
+      "stay": "avril 2023",
+      "text": "Parfait, séjour improvisé et de dernière minute pour Pâques 2023. Joli cadre, intérieur chaleureux, literie impeccable, grands placards de rangement, propreté, contacts et accueil au top. Erika et Pierre Louis sont des hôtes à l'écoute et disponibles. Encore merci, nous recommandons vivement Un air de Toscane, en famille ou entre amis, pour une visite ou un séjour en Beaujolais."
+    },
+    {
+      "score": 9,
+      "title": "Séjour",
+      "name": "Noëlle",
+      "city": "Saint-Julien",
+      "stay": "octobre 2021",
+      "text": "Très bon accueil, logement fonctionnel et propre. À recommander."
+    }
+  ]
+}

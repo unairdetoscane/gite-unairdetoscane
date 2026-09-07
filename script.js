@@ -183,3 +183,38 @@ form.addEventListener('submit',async e=>{
   }finally{submitBtn.disabled=false}
 });
 const todayIso=iso(new Date());document.querySelectorAll('input[type="date"]').forEach(i=>i.min=todayIso);
+
+
+// Avis voyageurs : chargement depuis avis.json et défilement automatique sur la page d'accueil.
+(async function initReviewCarousel(){
+  const track=document.getElementById('reviewTrack');
+  if(!track)return;
+  const dots=document.getElementById('reviewDots');
+  const prev=document.getElementById('reviewPrev');
+  const next=document.getElementById('reviewNext');
+  const avgEl=document.getElementById('reviewAverage');
+  let reviews=[];let current=0;let timer=null;
+  const escapeHtml=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  try{
+    const response=await fetch('avis.json?ts='+Date.now(),{cache:'no-store'});
+    if(!response.ok)throw new Error('reviews');
+    const data=await response.json();
+    reviews=Array.isArray(data.reviews)?data.reviews:[];
+  }catch(e){return}
+  if(!reviews.length)return;
+  const average=reviews.reduce((sum,r)=>sum+Number(r.score||0),0)/reviews.length;
+  if(avgEl)avgEl.textContent=average.toFixed(1).replace('.',',');
+  track.innerHTML=reviews.map((r,i)=>`<blockquote class="review-slide${i===0?' active':''}" data-index="${i}"><div class="review-score">${escapeHtml(r.score)} / 10</div><p>« ${escapeHtml(r.text)} »</p><footer>${[r.name,r.city,r.stay].filter(Boolean).map(escapeHtml).join(' · ')}</footer></blockquote>`).join('');
+  dots.innerHTML=reviews.map((_,i)=>`<button type="button" class="review-dot${i===0?' active':''}" aria-label="Afficher l’avis ${i+1}" data-index="${i}"></button>`).join('');
+  const slides=[...track.querySelectorAll('.review-slide')];
+  const dotButtons=[...dots.querySelectorAll('.review-dot')];
+  function show(i){current=(i+slides.length)%slides.length;slides.forEach((el,n)=>el.classList.toggle('active',n===current));dotButtons.forEach((el,n)=>el.classList.toggle('active',n===current))}
+  function restart(){clearInterval(timer);if(slides.length>1)timer=setInterval(()=>show(current+1),6000)}
+  prev?.addEventListener('click',()=>{show(current-1);restart()});
+  next?.addEventListener('click',()=>{show(current+1);restart()});
+  dotButtons.forEach(btn=>btn.addEventListener('click',()=>{show(Number(btn.dataset.index));restart()}));
+  const carousel=document.getElementById('reviewCarousel');
+  carousel?.addEventListener('mouseenter',()=>clearInterval(timer));
+  carousel?.addEventListener('mouseleave',restart);
+  restart();
+})();

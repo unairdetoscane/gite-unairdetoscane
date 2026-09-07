@@ -14,19 +14,55 @@ document.getElementById('nextMonth').onclick=()=>{view=new Date(view.getFullYear
 function nights(a,b){return Math.round((b-a)/86400000)}
 function datesOverlap(a,b){for(const r of cfg.bookedRanges){const rf=new Date(r.from+'T00:00:00'),rt=new Date(r.to+'T00:00:00');if(a<rt&&b>rf)return true}return false}
 function priceEstimate(a,b,guests){const n=nights(a,b);let nightly=cfg.baseNightlyRate;if(guests>cfg.baseGuests){if(cfg.extraAdultNightly==null)return {total:null,nightly,needsSupplement:true,nights:n};nightly+=(guests-cfg.baseGuests)*cfg.extraAdultNightly}return {total:nightly*n,nightly,needsSupplement:false,nights:n}}
-document.getElementById('checkDates').onclick=()=>{const res=document.getElementById('availabilityResult'),av=document.getElementById('arrival').value,de=document.getElementById('departure').value,guests=Number(document.getElementById('guestCount').value);if(!av||!de){res.textContent='Choisissez une date d’arrivée et une date de départ.';return}const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);if(n<cfg.minNights){res.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}if(datesOverlap(a,b)){res.textContent='Certaines dates sont déjà réservées. Choisissez une autre période.';return}const p=priceEstimate(a,b,guests);res.textContent=p.needsSupplement?`Période disponible : ${n} nuits. Base ${cfg.baseNightlyRate} € / nuit jusqu’à ${cfg.baseGuests} adultes ; supplément pour ${guests} adultes à confirmer.`:`Période disponible : ${n} nuits × ${p.nightly} € / nuit = ${p.total} € pour ${guests} adulte${guests>1?'s':''}.`;document.querySelector('[name="arrival"]').value=av;document.querySelector('[name="departure"]').value=de;document.querySelector('[name="adults"]').value=String(guests)};
+document.getElementById('checkDates').onclick=()=>{const res=document.getElementById('availabilityResult'),av=document.getElementById('arrival').value,de=document.getElementById('departure').value,guests=Number(document.getElementById('guestCount').value);if(!guests){res.textContent='Sélectionnez le nombre d’adultes.';return}if(!av||!de){res.textContent='Choisissez une date d’arrivée et une date de départ.';return}const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);if(n<cfg.minNights){res.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}if(datesOverlap(a,b)){res.textContent='Certaines dates sont déjà réservées. Choisissez une autre période.';return}const p=priceEstimate(a,b,guests);res.textContent=`Période disponible : ${n} nuit${n>1?'s':''} × ${p.nightly} € / nuit = ${p.total} € pour ${guests} adulte${guests>1?'s':''}.`;document.querySelector('[name="arrival"]').value=av;document.querySelector('[name="departure"]').value=de;document.querySelector('[name="adults"]').value=String(guests);updateFormPrice()}
 const form=document.getElementById('requestForm');
 function updateFormPrice(){
   const preview=document.getElementById('formPricePreview');
+  const totalField=document.getElementById('formTotalField');
   if(!preview)return;
   const av=form.querySelector('[name="arrival"]').value,de=form.querySelector('[name="departure"]').value,adults=Number(form.querySelector('[name="adults"]').value);
-  if(!av||!de){preview.textContent='Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour.';return}
+  if(!adults){preview.textContent='Sélectionnez le nombre d’adultes pour obtenir le montant du séjour.';if(totalField)totalField.value='';return}
+  if(!av||!de){preview.textContent='Sélectionnez vos dates pour obtenir le montant du séjour.';if(totalField)totalField.value='';return}
   const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);
-  if(n<=0){preview.textContent='La date de départ doit être postérieure à la date d’arrivée.';return}
-  if(n<cfg.minNights){preview.textContent=`Séjour minimum : ${cfg.minNights} nuits.`;return}
+  if(n<=0){preview.textContent='La date de départ doit être postérieure à la date d’arrivée.';if(totalField)totalField.value='';return}
+  if(n<cfg.minNights){preview.textContent=`Séjour minimum : ${cfg.minNights} nuits.`;if(totalField)totalField.value='';return}
   const p=priceEstimate(a,b,adults);
-  preview.textContent=`Montant du séjour : ${n} nuit${n>1?'s':''} × ${p.nightly} € = ${p.total} €${adults>cfg.baseGuests?` (${cfg.baseNightlyRate} € + ${(adults-cfg.baseGuests)*cfg.extraAdultNightly} € de supplément par nuit)`:''}.`;
+  const supplement=adults>cfg.baseGuests?` (${cfg.baseNightlyRate} € + ${(adults-cfg.baseGuests)*cfg.extraAdultNightly} € de supplément par nuit)`:'';
+  preview.textContent=`Montant du séjour : ${n} nuit${n>1?'s':''} × ${p.nightly} € = ${p.total} €${supplement}.`;
+  if(totalField)totalField.value=`${p.total} € (${n} nuit${n>1?'s':''} à ${p.nightly} €/nuit, ${adults} adulte${adults>1?'s':''})`;
 }
 form.querySelectorAll('[name="arrival"],[name="departure"],[name="adults"]').forEach(el=>el.addEventListener('change',updateFormPrice));
-form.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form);const adults=Number(d.get('adults'));const a=new Date(d.get('arrival')+'T00:00:00'),b=new Date(d.get('departure')+'T00:00:00'),n=nights(a,b);if(n<cfg.minNights){document.getElementById('formStatus').textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}if(datesOverlap(a,b)){document.getElementById('formStatus').textContent='Ces dates comprennent une période déjà réservée.';return}const p=priceEstimate(a,b,adults);const priceLine=p.needsSupplement?`Tarif indicatif : ${cfg.baseNightlyRate} € / nuit jusqu’à ${cfg.baseGuests} adultes, supplément pour ${adults} adultes à confirmer.`:`Tarif indicatif : ${p.total} € pour ${n} nuits.`;const msg=`Demande de réservation – Gîte Un air de Toscane\n\nNom : ${d.get('name')}\nTéléphone : ${d.get('phone')||'-'}\nE-mail : ${d.get('email')}\nArrivée : ${d.get('arrival')}\nDépart : ${d.get('departure')}\nNombre d’adultes : ${adults}\n${priceLine}\n\nMessage : ${d.get('message')||'-'}`;window.location.href=`mailto:${cfg.email}?subject=${encodeURIComponent('Demande de réservation – Un air de Toscane')}&body=${encodeURIComponent(msg)}`});
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const status=document.getElementById('formStatus');
+  const submitBtn=form.querySelector('button[type="submit"]');
+  const d=new FormData(form);
+  const adults=Number(d.get('adults'));
+  if(!adults){status.textContent='Sélectionnez le nombre d’adultes.';return}
+  const arrival=d.get('arrival'),departure=d.get('departure');
+  if(!arrival||!departure){status.textContent='Renseignez les dates d’arrivée et de départ.';return}
+  const a=new Date(arrival+'T00:00:00'),b=new Date(departure+'T00:00:00'),n=nights(a,b);
+  if(n<cfg.minNights){status.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}
+  if(datesOverlap(a,b)){status.textContent='Ces dates comprennent une période déjà réservée.';return}
+  const p=priceEstimate(a,b,adults);
+  d.set('montant_sejour',`${p.total} € — ${n} nuit${n>1?'s':''} × ${p.nightly} €/nuit — ${adults} adulte${adults>1?'s':''}`);
+  d.set('tarif_nuit',`${p.nightly} €`);
+  d.set('nombre_nuits',String(n));
+  d.set('caution',`${cfg.securityDeposit} €`);
+  status.textContent='Envoi de votre demande…';
+  submitBtn.disabled=true;
+  try{
+    const response=await fetch(form.action,{method:'POST',body:d,headers:{Accept:'application/json'}});
+    if(!response.ok)throw new Error('Formspree error');
+    status.textContent='Votre demande a bien été envoyée. Nous vous répondrons directement par e-mail.';
+    form.reset();
+    document.getElementById('guestCount').value='0';
+    document.getElementById('formPricePreview').textContent='Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour.';
+    if(document.getElementById('formTotalField'))document.getElementById('formTotalField').value='';
+  }catch(err){
+    status.textContent='L’envoi a échoué. Vous pouvez réessayer ou nous contacter directement par téléphone.';
+  }finally{
+    submitBtn.disabled=false;
+  }
+});
 const todayIso=iso(new Date());document.querySelectorAll('input[type="date"]').forEach(i=>i.min=todayIso);

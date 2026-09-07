@@ -89,7 +89,7 @@
           <div class="date-search">
             <label>Arrivée<input id="arrival" type="date"></label>
             <label>Départ<input id="departure" type="date"></label>
-            <label>Adultes<select id="guestCount"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+            <label>Adultes<select id="guestCount" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
             <button class="btn primary" id="checkDates" type="button">Vérifier</button>
           </div>
           <div id="availabilityResult" class="availability-result" aria-live="polite"></div>
@@ -131,15 +131,17 @@
     <section class="section reserve" id="reserver">
       <div class="wrap reserve-grid">
         <div><div class="eyebrow light">Réservation directe</div><h2>Parlez-nous de votre séjour</h2><p>Pas de plateforme intermédiaire ni de commission. Envoyez simplement votre demande ; vous restez en contact direct avec les propriétaires.</p><div class="contact-direct"><a id="phoneLink" href="tel:+33649486033">06 49 48 60 33</a><small>Pour une demande particulière sur la durée, les horaires ou l’organisation du séjour, appelez-nous directement.</small></div></div>
-        <form id="requestForm" class="request-form">
+        <form id="requestForm" class="request-form" action="https://formspree.io/f/mkjnqvoj" method="POST">
           <div class="form-row"><label>Nom et prénom<input name="name" required></label><label>Téléphone<input name="phone" type="tel"></label></div>
           <label>E-mail<input name="email" type="email" required></label>
           <div class="form-row"><label>Arrivée<input name="arrival" type="date" required></label><label>Départ<input name="departure" type="date" required></label></div>
-          <div class="form-row"><label>Nombre d’adultes<select name="adults" required><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><div class="adult-only-note"><strong>Adultes uniquement</strong><span>Les enfants ne sont pas admis dans le gîte.</span></div></div>
+          <div class="form-row"><label>Nombre d’adultes<select name="adults" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label><div class="adult-only-note"><strong>Adultes uniquement</strong><span>Les enfants ne sont pas admis dans le gîte.</span></div></div>
           <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour.</div>
           <label>Votre message<textarea name="message" rows="4" placeholder="Une question ou une demande particulière ?"></textarea></label>
-          <button class="btn primary full" type="submit">Envoyer ma demande par e-mail</button>
-          <p id="formStatus" class="form-status">Votre messagerie s’ouvrira avec la demande préremplie à destination du gîte.</p>
+          <input type="hidden" name="_subject" value="Demande de réservation – Un air de Toscane">
+          <input type="hidden" name="montant_sejour" id="formTotalField" value="">
+          <button class="btn primary full" type="submit">Envoyer ma demande de réservation</button>
+          <p id="formStatus" class="form-status" aria-live="polite">La demande sera envoyée directement au gîte, sans ouvrir votre messagerie.</p>
         </form>
       </div>
     </section>
@@ -151,7 +153,7 @@
         <div class="legal-grid">
           <article><h3>Éditeur du site</h3><p><strong>Gîte Un air de Toscane</strong><br>90, rue de la Croix-Rousse<br>69460 Salles-Arbuissonnas-en-Beaujolais<br>Tél. : 06 49 48 60 33<br>E-mail : <a href="mailto:pierrelouis.garnier@gmail.com">pierrelouis.garnier@gmail.com</a></p></article>
           <article><h3>Hébergement</h3><p>Site hébergé par GitHub Pages, service exploité par GitHub, Inc., 88 Colin P Kelly Jr Street, San Francisco, CA 94107, États-Unis.</p></article>
-          <article><h3>Données personnelles</h3><p>Ce site ne dépose pas de cookie publicitaire et n’utilise aucun outil de suivi. Le formulaire de demande ouvre votre logiciel de messagerie : les informations saisies ne sont pas stockées par ce site. Elles sont utilisées uniquement pour répondre à votre demande de séjour.</p></article>
+          <article><h3>Données personnelles</h3><p>Ce site ne dépose pas de cookie publicitaire et n’utilise aucun outil de suivi. Les informations saisies dans le formulaire sont transmises au gîte via le service Formspree afin de traiter votre demande de séjour. Elles sont utilisées uniquement pour répondre à votre demande de réservation.</p></article>
           <article><h3>Contenus</h3><p>Les textes et photographies présents sur ce site sont protégés par le droit d’auteur. Toute reproduction ou utilisation sans autorisation préalable est interdite.</p></article>
         </div>
       </div>

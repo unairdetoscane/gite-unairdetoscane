@@ -19,3 +19,15 @@
 .form-price-preview{margin:4px 0 16px;padding:13px 14px;border-radius:10px;background:var(--cream);border:1px solid var(--line);font-size:.9rem;font-weight:650;color:var(--deep)}
 @media(max-width:900px){.gallery{grid-auto-rows:250px}.gallery-real figure{height:100%}}
 @media(max-width:600px){.gallery{grid-auto-rows:240px}.gallery-real figure{height:240px!important}}
+
+/* V4 : champs adultes alignés avec les dates */
+.date-search{grid-template-columns:1fr 1fr 1fr auto;align-items:end}
+.date-search label{display:flex;flex-direction:column}
+.date-search input,.date-search select{box-sizing:border-box;width:100%;height:48px;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:0 12px;margin-top:5px;font:inherit;background:#fff;color:var(--ink)}
+.date-search select{appearance:auto}
+.date-search .btn{height:48px;align-self:end;margin:0}
+.request-form input,.request-form select{box-sizing:border-box;height:48px}
+.request-form select{padding-top:0;padding-bottom:0}
+.request-form .adult-only-note{min-height:48px;border-color:var(--line);background:var(--cream);color:var(--ink)}
+@media(max-width:900px){.date-search{grid-template-columns:1fr 1fr}.date-search .btn{grid-column:span 2}}
+@media(max-width:600px){.date-search{grid-template-columns:1fr}.date-search .btn{grid-column:auto;width:100%}}

@@ -5,7 +5,7 @@ window.GITE_CONFIG = {
   address: "90, rue de la Croix-Rousse, 69460 Salles-Arbuissonnas-en-Beaujolais",
   minNights: 2,
   maxGuests: 6,
-  adultsOnly: true,
+  adultsOnly: false,
   baseGuests: 4,
   baseNightlyRate: 150,
   // À compléter dès que le supplément est fixé. Exemple : 25 = +25 € par adulte supplémentaire et par nuit.

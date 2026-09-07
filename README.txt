@@ -6,7 +6,7 @@ Cette version conserve le visuel et le contenu de la V4.1, avec :
 - tarif automatique : 150 €/nuit jusqu'à 4 adultes ;
 - +15 €/adulte supplémentaire/nuit pour 5 ou 6 adultes ;
 - caution : 450 € ;
-- enfants non admis ;
+- enfants admis ;
 - mentions légales sur une page séparée ;
 - synchronisation automatique des indisponibilités depuis Booking.com.
 
@@ -84,3 +84,10 @@ Ne jamais publier ce lien dans le dépôt. Utiliser uniquement le secret BOOKING
 V4.3 — Correction affichage Booking
 ----------------------------------
 Le site lit désormais availability.json directement depuis le dépôt GitHub public. Cela évite le décalage éventuel entre la mise à jour du fichier par GitHub Actions et le redéploiement de GitHub Pages. Les nuits réservées apparaissent en terracotta dans le calendrier et sont refusées par le vérificateur de dates.
+
+V4.4 — Mise à jour familles
+- Ajout du nombre d'enfants dans la recherche de disponibilité et le formulaire.
+- L'âge de chaque enfant devient obligatoire dès qu'un ou plusieurs enfants sont indiqués.
+- Capacité contrôlée à 6 personnes au total.
+- Bouton Réserver à côté de Vérifier : il recopie les dates et occupants vers le formulaire.
+- Taxe de séjour indiquée en supplément, à régler sur place.

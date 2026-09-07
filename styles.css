@@ -38,3 +38,21 @@
 .legal-page .legal-grid h2{font-size:1.15rem;margin-top:0}
 .legal-nav{display:flex!important}
 @media (max-width:760px){.legal-page{padding-top:2rem}.legal-nav{display:flex!important}.legal-nav a{font-size:.9rem}}
+
+/* V4.4 : enfants, âges et accès direct au formulaire */
+.date-search{grid-template-columns:1fr 1fr .82fr .82fr auto auto;align-items:end}
+.date-search select{height:48px}
+.date-search .reserve-jump{height:48px;align-self:end;margin:0;background:#fff;color:var(--terracotta);border:1px solid rgba(255,255,255,.7)}
+.date-search .reserve-jump:hover{background:var(--cream);color:var(--terracotta-dark)}
+.child-ages{display:none;grid-template-columns:repeat(3,minmax(120px,1fr));gap:10px;margin:-2px 0 18px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.06)}
+.child-ages.visible{display:grid}
+.child-ages-title{grid-column:1/-1;font-size:.78rem;font-weight:700;color:#e8e9e6}
+.child-ages label{font-size:.76rem;font-weight:700;color:#fff}
+.child-ages select{display:block;width:100%;height:44px;margin-top:5px;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:0 10px;background:#fff;color:var(--ink);font:inherit}
+.request-form .child-ages{margin:0 0 14px;border-color:var(--line);background:var(--cream)}
+.request-form .child-ages-title,.request-form .child-ages label{color:var(--ink)}
+.request-form .child-ages select{border-color:var(--line)}
+.conditions-grid{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1050px){.date-search{grid-template-columns:1fr 1fr 1fr 1fr}.date-search .btn,.date-search .reserve-jump{width:100%}.date-search #checkDates{grid-column:span 2}.date-search .reserve-jump{grid-column:span 2}.conditions-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.date-search{grid-template-columns:1fr 1fr}.date-search #checkDates,.date-search .reserve-jump{grid-column:auto}.child-ages{grid-template-columns:1fr 1fr}.conditions-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.date-search{grid-template-columns:1fr}.date-search #checkDates,.date-search .reserve-jump{grid-column:auto}.child-ages{grid-template-columns:1fr}.conditions-grid{grid-template-columns:1fr 1fr}}

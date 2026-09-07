@@ -62,42 +62,111 @@ document.getElementById('nextMonth').onclick=()=>{view=new Date(view.getFullYear
 function nights(a,b){return Math.round((b-a)/86400000)}
 function datesOverlap(a,b){for(const r of activeBookedRanges){const rf=new Date(r.from+'T00:00:00'),rt=new Date(r.to+'T00:00:00');if(a<rt&&b>rf)return true}return false}
 function priceEstimate(a,b,guests){const n=nights(a,b);let nightly=cfg.baseNightlyRate;if(guests>cfg.baseGuests){if(cfg.extraAdultNightly==null)return {total:null,nightly,needsSupplement:true,nights:n};nightly+=(guests-cfg.baseGuests)*cfg.extraAdultNightly}return {total:nightly*n,nightly,needsSupplement:false,nights:n}}
-document.getElementById('checkDates').onclick=()=>{const res=document.getElementById('availabilityResult');if(!availabilityReady){res.textContent='Chargement du planning en cours…';return}const av=document.getElementById('arrival').value,de=document.getElementById('departure').value,guests=Number(document.getElementById('guestCount').value);if(!guests){res.textContent='Sélectionnez le nombre d’adultes.';return}if(!av||!de){res.textContent='Choisissez une date d’arrivée et une date de départ.';return}const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);if(n<cfg.minNights){res.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}if(datesOverlap(a,b)){res.textContent='Certaines dates sont déjà réservées. Choisissez une autre période.';return}const p=priceEstimate(a,b,guests);res.textContent=`Période disponible : ${n} nuit${n>1?'s':''} × ${p.nightly} € / nuit = ${p.total} € pour ${guests} adulte${guests>1?'s':''}.`;document.querySelector('[name="arrival"]').value=av;document.querySelector('[name="departure"]').value=de;document.querySelector('[name="adults"]').value=String(guests);updateFormPrice()}
+
+function ageOptions(){
+  let html='<option value="" selected>Âge</option><option value="0">Moins d\'1 an</option>';
+  for(let i=1;i<=17;i++)html+=`<option value="${i}">${i} an${i>1?'s':''}</option>`;
+  return html;
+}
+function renderChildAges(containerId,count,forForm=false,values=[]){
+  const box=document.getElementById(containerId);if(!box)return;
+  box.innerHTML='';
+  if(!count){box.classList.remove('visible');return}
+  box.classList.add('visible');
+  const title=document.createElement('span');title.className='child-ages-title';title.textContent=`Âge${count>1?'s':''} ${count>1?'des enfants':'de l’enfant'}`;box.appendChild(title);
+  for(let i=0;i<count;i++){
+    const label=document.createElement('label');label.textContent=`Enfant ${i+1}`;
+    const select=document.createElement('select');select.className='child-age-select';select.dataset.childAge=String(i+1);if(forForm)select.name=`child_age_${i+1}`;select.required=true;select.innerHTML=ageOptions();
+    if(values[i]!==undefined&&values[i]!==null)select.value=String(values[i]);
+    label.appendChild(select);box.appendChild(label);
+  }
+}
+function getChildAges(containerId){return [...document.querySelectorAll(`#${containerId} .child-age-select`)].map(s=>s.value)}
+function childrenAreComplete(containerId,count){const ages=getChildAges(containerId);return count===0||(ages.length===count&&ages.every(v=>v!==''))}
+function guestSummary(adults,children){return `${adults} adulte${adults>1?'s':''}${children?` et ${children} enfant${children>1?'s':''}`:''}`}
+function totalCapacityOK(adults,children){return adults+children<=cfg.maxGuests}
+
+const topChildCount=document.getElementById('childCount');
+if(topChildCount)topChildCount.addEventListener('change',()=>renderChildAges('childAgesTop',Number(topChildCount.value),false));
+
+function syncTopToForm(){
+  const av=document.getElementById('arrival').value,de=document.getElementById('departure').value;
+  const adults=Number(document.getElementById('guestCount').value),children=Number(document.getElementById('childCount').value);
+  const ages=getChildAges('childAgesTop');
+  form.querySelector('[name="arrival"]').value=av;
+  form.querySelector('[name="departure"]').value=de;
+  form.querySelector('[name="adults"]').value=String(adults);
+  form.querySelector('[name="children"]').value=String(children);
+  renderChildAges('childAgesForm',children,true,ages);
+}
+
+document.getElementById('checkDates').onclick=()=>{
+  const res=document.getElementById('availabilityResult');
+  if(!availabilityReady){res.textContent='Chargement du planning en cours…';return}
+  const av=document.getElementById('arrival').value,de=document.getElementById('departure').value;
+  const guests=Number(document.getElementById('guestCount').value),children=Number(document.getElementById('childCount').value);
+  if(!guests){res.textContent='Sélectionnez le nombre d’adultes.';return}
+  if(!totalCapacityOK(guests,children)){res.textContent=`La capacité maximale du gîte est de ${cfg.maxGuests} personnes au total.`;return}
+  if(!childrenAreComplete('childAgesTop',children)){res.textContent='Renseignez l’âge de chaque enfant.';return}
+  if(!av||!de){res.textContent='Choisissez une date d’arrivée et une date de départ.';return}
+  const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);
+  if(n<cfg.minNights){res.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}
+  if(datesOverlap(a,b)){res.textContent='Certaines dates sont déjà réservées. Choisissez une autre période.';return}
+  const p=priceEstimate(a,b,guests);
+  res.textContent=`Période disponible : ${n} nuit${n>1?'s':''} × ${p.nightly} € / nuit = ${p.total} € pour ${guestSummary(guests,children)}. Taxe de séjour en supplément, à régler sur place.`;
+  syncTopToForm();updateFormPrice();
+};
+
 const form=document.getElementById('requestForm');
+const formChildCount=document.getElementById('formChildCount');
+if(formChildCount)formChildCount.addEventListener('change',()=>{renderChildAges('childAgesForm',Number(formChildCount.value),true);updateFormPrice()});
+const reserveJump=document.getElementById('reserveJump');
+if(reserveJump)reserveJump.addEventListener('click',()=>{syncTopToForm();updateFormPrice()});
+
 function updateFormPrice(){
   const preview=document.getElementById('formPricePreview');
   const totalField=document.getElementById('formTotalField');
   if(!preview)return;
-  const av=form.querySelector('[name="arrival"]').value,de=form.querySelector('[name="departure"]').value,adults=Number(form.querySelector('[name="adults"]').value);
-  if(!adults){preview.textContent='Sélectionnez le nombre d’adultes pour obtenir le montant du séjour.';if(totalField)totalField.value='';return}
-  if(!av||!de){preview.textContent='Sélectionnez vos dates pour obtenir le montant du séjour.';if(totalField)totalField.value='';return}
+  const av=form.querySelector('[name="arrival"]').value,de=form.querySelector('[name="departure"]').value;
+  const adults=Number(form.querySelector('[name="adults"]').value),children=Number(form.querySelector('[name="children"]').value);
+  if(!adults){preview.textContent='Sélectionnez le nombre d’adultes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
+  if(!totalCapacityOK(adults,children)){preview.textContent=`La capacité maximale du gîte est de ${cfg.maxGuests} personnes au total.`;if(totalField)totalField.value='';return}
+  if(children&&!childrenAreComplete('childAgesForm',children)){preview.textContent='Renseignez l’âge de chaque enfant. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
+  if(!av||!de){preview.textContent='Sélectionnez vos dates pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';if(totalField)totalField.value='';return}
   const a=new Date(av+'T00:00:00'),b=new Date(de+'T00:00:00'),n=nights(a,b);
   if(n<=0){preview.textContent='La date de départ doit être postérieure à la date d’arrivée.';if(totalField)totalField.value='';return}
   if(n<cfg.minNights){preview.textContent=`Séjour minimum : ${cfg.minNights} nuits.`;if(totalField)totalField.value='';return}
   const p=priceEstimate(a,b,adults);
   const supplement=adults>cfg.baseGuests?` (${cfg.baseNightlyRate} € + ${(adults-cfg.baseGuests)*cfg.extraAdultNightly} € de supplément par nuit)`:'';
-  preview.textContent=`Montant du séjour : ${n} nuit${n>1?'s':''} × ${p.nightly} € = ${p.total} €${supplement}.`;
-  if(totalField)totalField.value=`${p.total} € (${n} nuit${n>1?'s':''} à ${p.nightly} €/nuit, ${adults} adulte${adults>1?'s':''})`;
+  preview.textContent=`Montant du séjour : ${n} nuit${n>1?'s':''} × ${p.nightly} € = ${p.total} €${supplement}. ${guestSummary(adults,children)}. Taxe de séjour en supplément, à régler sur place.`;
+  if(totalField)totalField.value=`${p.total} € (${n} nuit${n>1?'s':''} à ${p.nightly} €/nuit, ${guestSummary(adults,children)}) — taxe de séjour en supplément`;
 }
 form.querySelectorAll('[name="arrival"],[name="departure"],[name="adults"]').forEach(el=>el.addEventListener('change',updateFormPrice));
+form.addEventListener('change',e=>{if(e.target.classList.contains('child-age-select'))updateFormPrice()});
 form.addEventListener('submit',async e=>{
   e.preventDefault();
   const status=document.getElementById('formStatus');
   const submitBtn=form.querySelector('button[type="submit"]');
   if(!availabilityReady){status.textContent='Chargement du planning en cours…';return}
   const d=new FormData(form);
-  const adults=Number(d.get('adults'));
+  const adults=Number(d.get('adults')),children=Number(d.get('children'));
   if(!adults){status.textContent='Sélectionnez le nombre d’adultes.';return}
+  if(!totalCapacityOK(adults,children)){status.textContent=`La capacité maximale du gîte est de ${cfg.maxGuests} personnes au total.`;return}
+  const ages=getChildAges('childAgesForm');
+  if(children&&!childrenAreComplete('childAgesForm',children)){status.textContent='Renseignez l’âge de chaque enfant.';return}
   const arrival=d.get('arrival'),departure=d.get('departure');
   if(!arrival||!departure){status.textContent='Renseignez les dates d’arrivée et de départ.';return}
   const a=new Date(arrival+'T00:00:00'),b=new Date(departure+'T00:00:00'),n=nights(a,b);
   if(n<cfg.minNights){status.textContent=`Le séjour minimum est de ${cfg.minNights} nuits.`;return}
   if(datesOverlap(a,b)){status.textContent='Ces dates comprennent une période déjà réservée.';return}
   const p=priceEstimate(a,b,adults);
-  d.set('montant_sejour',`${p.total} € — ${n} nuit${n>1?'s':''} × ${p.nightly} €/nuit — ${adults} adulte${adults>1?'s':''}`);
+  d.set('montant_sejour',`${p.total} € — ${n} nuit${n>1?'s':''} × ${p.nightly} €/nuit — ${guestSummary(adults,children)} — taxe de séjour en supplément`);
   d.set('tarif_nuit',`${p.nightly} €`);
   d.set('nombre_nuits',String(n));
   d.set('caution',`${cfg.securityDeposit} €`);
+  d.set('nombre_enfants',String(children));
+  d.set('ages_enfants',children?ages.map((v,i)=>`Enfant ${i+1}: ${v==='0'?"moins d’1 an":v+' ans'}`).join(' ; '):'Aucun');
+  d.set('taxe_de_sejour','En supplément, à régler sur place');
   status.textContent='Envoi de votre demande…';
   submitBtn.disabled=true;
   try{
@@ -105,13 +174,12 @@ form.addEventListener('submit',async e=>{
     if(!response.ok)throw new Error('Formspree error');
     status.textContent='Votre demande a bien été envoyée. Nous vous répondrons directement par e-mail.';
     form.reset();
-    document.getElementById('guestCount').value='0';
-    document.getElementById('formPricePreview').textContent='Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour.';
+    document.getElementById('guestCount').value='0';document.getElementById('childCount').value='0';
+    renderChildAges('childAgesTop',0,false);renderChildAges('childAgesForm',0,true);
+    document.getElementById('formPricePreview').textContent='Sélectionnez vos dates et le nombre d’adultes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.';
     if(document.getElementById('formTotalField'))document.getElementById('formTotalField').value='';
   }catch(err){
     status.textContent='L’envoi a échoué. Vous pouvez réessayer ou nous contacter directement par téléphone.';
-  }finally{
-    submitBtn.disabled=false;
-  }
+  }finally{submitBtn.disabled=false}
 });
 const todayIso=iso(new Date());document.querySelectorAll('input[type="date"]').forEach(i=>i.min=todayIso);

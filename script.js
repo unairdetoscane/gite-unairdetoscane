@@ -209,12 +209,53 @@ window.addEventListener('pageshow',()=>{ if(!location.hash && window.scrollY < 1
   if(!reviews.length)return;
   const average=reviews.reduce((sum,r)=>sum+Number(r.score||0),0)/reviews.length;
   if(avgEl)avgEl.textContent=average.toFixed(1).replace('.',',');
-  const reviewSizeClass=text=>{const n=String(text||'').length;return n>520?' review-xlong':n>360?' review-long':n>220?' review-medium':''};
-  track.innerHTML=reviews.map((r,i)=>`<blockquote class="review-slide${reviewSizeClass(r.text)}${i===0?' active':''}" data-index="${i}"><div class="review-score">${escapeHtml(r.score)} / 10</div><p>« ${escapeHtml(r.text)} »</p><footer>${[r.name,r.city,r.stay].filter(Boolean).map(escapeHtml).join(' · ')}</footer></blockquote>`).join('');
+  track.innerHTML=reviews.map((r,i)=>`<blockquote class="review-slide${i===0?' active':''}" data-index="${i}"><div class="review-score">${escapeHtml(r.score)} / 10</div><p>« ${escapeHtml(r.text)} »</p><footer>${[r.name,r.city,r.stay].filter(Boolean).map(escapeHtml).join(' · ')}</footer></blockquote>`).join('');
   dots.innerHTML=reviews.map((_,i)=>`<button type="button" class="review-dot${i===0?' active':''}" aria-label="Afficher l’avis ${i+1}" data-index="${i}"></button>`).join('');
   const slides=[...track.querySelectorAll('.review-slide')];
   const dotButtons=[...dots.querySelectorAll('.review-dot')];
-  function show(i){current=(i+slides.length)%slides.length;slides.forEach((el,n)=>el.classList.toggle('active',n===current));dotButtons.forEach((el,n)=>el.classList.toggle('active',n===current))}
+
+  // Ajuste réellement la taille de chaque avis selon l'espace disponible.
+  // On mesure le texte rendu au lieu d'estimer sa taille à partir du nombre de caractères.
+  function fitReviewText(slide){
+    const p=slide.querySelector('p');
+    const score=slide.querySelector('.review-score');
+    const footer=slide.querySelector('footer');
+    if(!p||!score||!footer)return;
+
+    const cs=getComputedStyle(slide);
+    const padTop=parseFloat(cs.paddingTop)||0;
+    const padBottom=parseFloat(cs.paddingBottom)||0;
+    const available=Math.max(80,slide.clientHeight-padTop-padBottom-score.offsetHeight-footer.offsetHeight-24);
+    const maxFont=window.innerWidth<=600?21:window.innerWidth<=900?24:28;
+    const minFont=window.innerWidth<=600?13:14;
+
+    p.style.fontSize=maxFont+'px';
+    p.style.lineHeight='1.32';
+    p.style.display='block';
+    p.style.height='auto';
+    p.style.flex='0 0 auto';
+
+    let size=maxFont;
+    while(size>minFont && p.scrollHeight>available){
+      size-=0.5;
+      p.style.fontSize=size+'px';
+    }
+
+    // Si le commentaire est exceptionnellement long, on resserre légèrement l'interligne.
+    if(p.scrollHeight>available){
+      p.style.lineHeight='1.22';
+    }
+
+    // Centre verticalement le texte seulement s'il reste de la place.
+    const free=Math.max(0,available-p.scrollHeight);
+    p.style.marginTop=(10+free/2)+'px';
+    p.style.marginBottom=(12+free/2)+'px';
+  }
+  function fitAllReviews(){slides.forEach(fitReviewText)}
+  requestAnimationFrame(()=>requestAnimationFrame(fitAllReviews));
+  let resizeTimer;
+  window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(fitAllReviews,120)});
+  function show(i){current=(i+slides.length)%slides.length;slides.forEach((el,n)=>el.classList.toggle('active',n===current));dotButtons.forEach((el,n)=>el.classList.toggle('active',n===current));requestAnimationFrame(()=>fitReviewText(slides[current]))}
   function restart(){clearInterval(timer);if(slides.length>1)timer=setInterval(()=>show(current+1),6000)}
   prev?.addEventListener('click',()=>{show(current-1);restart()});
   next?.addEventListener('click',()=>{show(current+1);restart()});

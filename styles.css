@@ -177,3 +177,16 @@
 .nearby-section{padding-top:88px}.nearby-head{margin-bottom:30px}.nearby-head>p{max-width:440px;color:var(--muted)}.nearby-groups{display:grid;grid-template-columns:1fr 1fr;gap:18px}.nearby-group{border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden}.nearby-group-title{display:flex;gap:16px;align-items:flex-start;padding:24px 26px 20px;background:linear-gradient(135deg,#f8f1e7,#fffdf9);border-bottom:1px solid var(--line)}.nearby-group-title>span{width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:grid;place-items:center;background:var(--terracotta);color:#fff;font-weight:800;font-size:.78rem}.nearby-group-title h3{margin:0 0 3px;font-size:1.35rem}.nearby-group-title p{margin:0;color:var(--muted);font-size:.82rem}.nearby-list{padding:8px 26px 16px}.nearby-item{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:12px 0;border-bottom:1px solid #eee5d9}.nearby-item:last-child{border-bottom:0}.nearby-item b{font-size:.92rem;line-height:1.35}.nearby-item span{white-space:nowrap;color:var(--terracotta);font-weight:800;font-size:.8rem}.nearby-item sup{font-size:.65em}.nearby-note{margin:14px 0 0;color:var(--muted);font-size:.76rem}
 @media(max-width:800px){.nearby-groups{grid-template-columns:1fr}}
 @media(max-width:520px){.nearby-group-title{padding:20px}.nearby-list{padding:6px 20px 14px}.nearby-item{gap:12px}.nearby-item b{font-size:.88rem}}
+
+/* V4.22 — champs de dates réellement responsifs sur mobile (iOS/Android) */
+.date-search > label{min-width:0;max-width:100%}
+.date-search input[type="date"]{display:block;min-width:0;max-width:100%;width:100%;box-sizing:border-box}
+@media(max-width:700px){
+  .date-search{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .date-search > *{min-width:0;max-width:100%}
+  .date-search input[type="date"]{min-width:0;width:100%;font-size:16px;padding-left:10px;padding-right:6px}
+}
+@media(max-width:520px){
+  .date-search{grid-template-columns:minmax(0,1fr)}
+  .date-search #checkDates,.date-search .reserve-jump{grid-column:auto;width:100%}
+}

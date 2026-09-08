@@ -100,7 +100,7 @@
         <div>
           <div class="eyebrow light">Tarifs & disponibilités</div>
           <h2>Choisissez vos dates</h2>
-          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 personnes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 personnes, ajoutez 15 € par personne supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.</strong></p>
+          <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 personnes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 personnes, ajoutez 15 € par personne supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.</strong> <strong>Les animaux de compagnie ne sont pas admis.</strong></p>
           <div class="date-search">
             <label>Arrivée<input id="arrival" type="date"></label>
             <label>Départ<input id="departure" type="date"></label>
@@ -152,7 +152,7 @@
     <section class="section soft" id="avis">
       <div class="wrap">
         <div class="reviews-title-row">
-          <div><div class="eyebrow">Avis voyageurs</div><div class="reviews-head"><h2><span id="reviewAverage">9,5</span> / 10 <span>Exceptionnel</span></h2></div></div>
+          <div><div class="eyebrow">Avis voyageurs</div><div class="reviews-head"><h2><span class="reviews-average" id="reviewAverage">9,5</span> <span class="reviews-outof">/ 10</span> <span class="reviews-label">Exceptionnel</span></h2></div></div>
           <a class="btn secondary" href="avis.html">Voir les avis &amp; déposer le vôtre</a>
         </div>
         <div class="review-carousel" id="reviewCarousel" aria-label="Avis voyageurs">
@@ -168,14 +168,14 @@
 
     <section class="section reserve" id="reserver">
       <div class="wrap reserve-grid">
-        <div><div class="eyebrow light">Réservation directe</div><h2>Parlez-nous de votre séjour</h2><p>Pas de plateforme intermédiaire ni de commission. Envoyez simplement votre demande ; vous restez en contact direct avec les propriétaires.</p><div class="contact-direct"><a id="phoneLink" href="tel:+33649486033">06 49 48 60 33</a><small>Pour une demande particulière sur la durée, les horaires ou l’organisation du séjour, appelez-nous directement.</small></div></div>
+        <div><div class="eyebrow light">Réservation directe</div><h2>Réservez votre séjour</h2><p>Pas de plateforme intermédiaire ni de commission. Envoyez simplement votre demande ; vous restez en contact direct avec les propriétaires.</p><div class="contact-direct"><a id="phoneLink" href="tel:+33649486033">06 49 48 60 33</a><small>Pour une demande particulière sur la durée, les horaires ou l’organisation du séjour, appelez-nous directement.</small></div></div>
         <form id="requestForm" class="request-form" action="https://formspree.io/f/mkjnqvoj" method="POST">
           <div class="form-row"><label>Nom et prénom<input name="name" required></label><label>Téléphone<input name="phone" type="tel"></label></div>
           <label>E-mail<input name="email" type="email" required></label>
           <div class="form-row"><label>Arrivée<input name="arrival" type="date" required></label><label>Départ<input name="departure" type="date" required></label></div>
           <div class="form-row"><label>Nombre d’adultes<select name="adults" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label><label>Nombre d’enfants<select name="children" id="formChildCount"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label></div>
           <div id="childAgesForm" class="child-ages child-ages-form" aria-live="polite"></div>
-          <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre de personnes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place.</div>
+          <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre de personnes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place. Les animaux de compagnie ne sont pas admis.</div>
           <label>Votre message<textarea name="message" rows="4" placeholder="Une question ou une demande particulière ?"></textarea></label>
           <input type="hidden" name="_subject" value="Demande de réservation – Un air de Toscane">
           <input type="hidden" name="montant_sejour" id="formTotalField" value="">

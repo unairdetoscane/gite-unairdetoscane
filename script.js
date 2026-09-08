@@ -367,28 +367,221 @@ window.addEventListener('load',positionRequestedSection);
 window.addEventListener('pageshow',positionRequestedSection);
 
 
-// V4.30 — ouverture du calendrier en cliquant sur toute la zone visuelle.
-// Le champ natif reste caché : aucun "jj/mm/aaaa" supplémentaire ne peut s'afficher.
+// V4.37 — calendrier :
+ // sur mobile, on conserve strictement le sélecteur natif qui fonctionne bien ;
+ // sur PC, on utilise un calendrier maison positionné sous la zone.
 document.querySelectorAll('.mobile-date-box').forEach(box=>{
   const input=box.querySelector('input[type="date"]');
   if(!input) return;
 
   box.style.cursor='pointer';
-  box.addEventListener('click',()=>{
-    try{
-      if(typeof input.showPicker==='function'){
-        input.showPicker();
-      }else{
+
+  box.addEventListener('click',(ev)=>{
+    if(window.matchMedia('(max-width:900px)').matches){
+      try{
+        if(typeof input.showPicker==='function'){
+          input.showPicker();
+        }else{
+          input.focus({preventScroll:true});
+          input.click();
+        }
+      }catch(e){
         input.focus({preventScroll:true});
         input.click();
       }
-    }catch(e){
-      input.focus({preventScroll:true});
-      input.click();
     }
   });
 });
 
+(function initDesktopDatePicker(){
+  if(document.getElementById('desktopDatePicker')) return;
+
+  const picker=document.createElement('div');
+  picker.id='desktopDatePicker';
+  picker.className='desktop-date-picker';
+  picker.hidden=true;
+  picker.innerHTML=`
+    <div class="ddp-head">
+      <button type="button" class="ddp-prev" aria-label="Mois précédent">‹</button>
+      <strong class="ddp-title"></strong>
+      <button type="button" class="ddp-next" aria-label="Mois suivant">›</button>
+    </div>
+    <div class="ddp-week">
+      <span>lu</span><span>ma</span><span>me</span><span>je</span><span>ve</span><span>sa</span><span>di</span>
+    </div>
+    <div class="ddp-days"></div>
+    <div class="ddp-foot">
+      <button type="button" class="ddp-clear">Effacer</button>
+      <button type="button" class="ddp-today">Aujourd’hui</button>
+    </div>`;
+  document.body.appendChild(picker);
+
+  const title=picker.querySelector('.ddp-title');
+  const days=picker.querySelector('.ddp-days');
+  const monthNames=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+  let activeInput=null;
+  let activeBox=null;
+  let viewYear=0;
+  let viewMonth=0;
+
+  function iso(y,m,d){
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  function localTodayIso(){
+    const n=new Date();
+    return iso(n.getFullYear(),n.getMonth(),n.getDate());
+  }
+
+  function inputDateParts(){
+    if(activeInput?.value){
+      const [y,m,d]=activeInput.value.split('-').map(Number);
+      if(y && m && d) return {y,m:m-1,d};
+    }
+    const n=new Date();
+    return {y:n.getFullYear(),m:n.getMonth(),d:n.getDate()};
+  }
+
+  function isOutsideLimits(value){
+    if(activeInput?.min && value < activeInput.min) return true;
+    if(activeInput?.max && value > activeInput.max) return true;
+    return false;
+  }
+
+  function setValue(value){
+    if(!activeInput) return;
+    activeInput.value=value;
+    activeInput.dispatchEvent(new Event('input',{bubbles:true}));
+    activeInput.dispatchEvent(new Event('change',{bubbles:true}));
+    close();
+  }
+
+  function render(){
+    if(!activeInput) return;
+    title.textContent=`${monthNames[viewMonth]} ${viewYear}`;
+    days.innerHTML='';
+
+    const first=new Date(viewYear,viewMonth,1);
+    const mondayIndex=(first.getDay()+6)%7;
+    const current=activeInput.value;
+    const today=localTodayIso();
+
+    const start=new Date(viewYear,viewMonth,1-mondayIndex);
+
+    for(let i=0;i<42;i++){
+      const d=new Date(start);
+      d.setDate(start.getDate()+i);
+
+      const y=d.getFullYear(), m=d.getMonth(), day=d.getDate();
+      const value=iso(y,m,day);
+
+      const b=document.createElement('button');
+      b.type='button';
+      b.className='ddp-day';
+      b.textContent=String(day);
+      b.dataset.value=value;
+
+      if(m!==viewMonth) b.classList.add('is-other');
+      if(value===current) b.classList.add('is-selected');
+      if(value===today) b.classList.add('is-today');
+
+      if(isOutsideLimits(value)){
+        b.disabled=true;
+      }else{
+        b.addEventListener('click',()=>setValue(value));
+      }
+      days.appendChild(b);
+    }
+  }
+
+  function position(){
+    if(!activeBox || picker.hidden) return;
+
+    const r=activeBox.getBoundingClientRect();
+    const pickerWidth=picker.offsetWidth || 300;
+    const gap=6;
+
+    let left=r.left + window.scrollX;
+    const maxLeft=window.scrollX + document.documentElement.clientWidth - pickerWidth - 8;
+    if(left>maxLeft) left=maxLeft;
+    if(left<window.scrollX+8) left=window.scrollX+8;
+
+    let top=r.bottom + window.scrollY + gap;
+
+    picker.style.left=`${left}px`;
+    picker.style.top=`${top}px`;
+  }
+
+  function open(box,input){
+    if(window.matchMedia('(max-width:900px)').matches) return;
+
+    activeBox=box;
+    activeInput=input;
+
+    const p=inputDateParts();
+    viewYear=p.y;
+    viewMonth=p.m;
+
+    picker.hidden=false;
+    render();
+    position();
+  }
+
+  function close(){
+    picker.hidden=true;
+    activeInput=null;
+    activeBox=null;
+  }
+
+  document.querySelectorAll('.mobile-date-box').forEach(box=>{
+    const input=box.querySelector('input[type="date"]');
+    if(!input) return;
+
+    box.addEventListener('click',(ev)=>{
+      if(window.matchMedia('(min-width:901px)').matches){
+        ev.preventDefault();
+        open(box,input);
+      }
+    });
+  });
+
+  picker.querySelector('.ddp-prev').addEventListener('click',()=>{
+    viewMonth--;
+    if(viewMonth<0){viewMonth=11;viewYear--;}
+    render();
+  });
+
+  picker.querySelector('.ddp-next').addEventListener('click',()=>{
+    viewMonth++;
+    if(viewMonth>11){viewMonth=0;viewYear++;}
+    render();
+  });
+
+  picker.querySelector('.ddp-clear').addEventListener('click',()=>setValue(''));
+  picker.querySelector('.ddp-today').addEventListener('click',()=>{
+    const today=localTodayIso();
+    if(!isOutsideLimits(today)) setValue(today);
+  });
+
+  document.addEventListener('click',(ev)=>{
+    if(picker.hidden) return;
+    if(picker.contains(ev.target)) return;
+    if(activeBox && activeBox.contains(ev.target)) return;
+    close();
+  });
+
+  document.addEventListener('keydown',(ev)=>{
+    if(ev.key==='Escape') close();
+  });
+
+  window.addEventListener('resize',()=>{
+    if(!picker.hidden) position();
+  });
+  window.addEventListener('scroll',()=>{
+    if(!picker.hidden) position();
+  },{passive:true});
+})();
 
 // V4.34 — le bouton Réserver reprend systématiquement toutes les valeurs du bloc tarifs.
 document.querySelectorAll('.reserve-jump').forEach(el=>{

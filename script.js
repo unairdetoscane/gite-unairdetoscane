@@ -1,7 +1,30 @@
 const cfg=window.GITE_CONFIG;
 const navBtn=document.querySelector('.nav-toggle'),nav=document.querySelector('.main-nav');
 navBtn.addEventListener('click',()=>{nav.classList.toggle('open');navBtn.setAttribute('aria-expanded',nav.classList.contains('open'))});
-document.querySelectorAll('.main-nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+// Navigation interne mobile : on ferme d'abord le menu, puis on recalcule
+// la position de la cible. Cela évite le premier clic qui s'arrêtait trop haut.
+document.querySelectorAll('.main-nav a').forEach(a=>a.addEventListener('click',e=>{
+  const href=a.getAttribute('href')||'';
+  const isSamePageAnchor=href.startsWith('#') && href.length>1;
+  if(!isSamePageAnchor){
+    nav.classList.remove('open');
+    navBtn.setAttribute('aria-expanded','false');
+    return;
+  }
+  const target=document.querySelector(href);
+  if(!target)return;
+  e.preventDefault();
+  nav.classList.remove('open');
+  navBtn.setAttribute('aria-expanded','false');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    const header=document.querySelector('.site-header');
+    const offset=(header?header.offsetHeight:0)+10;
+    const y=target.getBoundingClientRect().top+window.scrollY-offset;
+    window.scrollTo({top:y,behavior:'smooth'});
+    history.replaceState(null,'',href);
+  }));
+}));
 const phone=document.getElementById('phoneLink');phone.textContent=cfg.phone;phone.href=`tel:${cfg.phoneHref}`;
 const calendarUpdated=document.getElementById('calendarUpdated');
 calendarUpdated.textContent=cfg.lastCalendarUpdate;

@@ -190,3 +190,63 @@
   .date-search{grid-template-columns:minmax(0,1fr)}
   .date-search #checkDates,.date-search .reserve-jump{grid-column:auto;width:100%}
 }
+
+/* V4.23 — correction définitive mobile : dates + ancres du menu */
+#tarifs,#gite,#photos,#reserver{scroll-margin-top:88px}
+.booking-grid > *, .date-search > *, .form-row > *{min-width:0}
+input[type="date"]{
+  box-sizing:border-box;
+  inline-size:100%;
+  width:100%;
+  min-inline-size:0;
+  min-width:0;
+  max-inline-size:100%;
+  max-width:100%;
+}
+@media(max-width:700px){
+  /* Sur téléphone/tablette étroite, on abandonne la grille pour éviter
+     la largeur intrinsèque imposée par les champs date natifs. */
+  .date-search{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:100%;
+    gap:10px;
+  }
+  .date-search > label,
+  .date-search > button,
+  .date-search > a{
+    display:flex;
+    flex-direction:column;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  .date-search input[type="date"],
+  .request-form input[type="date"]{
+    display:block;
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    inline-size:100%!important;
+    min-inline-size:0!important;
+    max-inline-size:100%!important;
+    font-size:16px;
+    overflow:hidden;
+  }
+  .date-search .guest-select-field,
+  .date-search .guest-select-field select{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  .date-search #checkDates,
+  .date-search .reserve-jump{
+    width:100%!important;
+    grid-column:auto;
+  }
+}
+@media(max-width:600px){
+  .request-form,.form-row,.request-form label{min-width:0;max-width:100%}
+  .request-form input[type="date"]{width:100%!important;max-width:100%!important}
+}

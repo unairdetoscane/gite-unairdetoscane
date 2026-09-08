@@ -93,3 +93,13 @@ V4.4 — Mise à jour familles
 - Taxe de séjour indiquée en supplément, à régler sur place.
 
 V4.5 : correction visuelle des listes Adultes et Enfants : la valeur sélectionnée reste visible.
+
+
+SEO V4.10
+- Domaine canonique : https://www.gite-unairdetoscane.fr/
+- Sitemap : /sitemap.xml
+- Robots : /robots.txt
+- Données structurées VacationRental + WebSite intégrées à l'accueil.
+- Nouvelle page /decouvrir-beaujolais.html pour le référencement local.
+- Titres, descriptions, Open Graph et textes alternatifs optimisés.
+- Demain : ajouter le domaine à Google Search Console, envoyer sitemap.xml et demander l'indexation des 3 pages publiques.

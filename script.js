@@ -185,6 +185,11 @@ form.addEventListener('submit',async e=>{
 const todayIso=iso(new Date());document.querySelectorAll('input[type="date"]').forEach(i=>i.min=todayIso);
 
 
+
+// Évite qu'un chargement asynchrone des avis ne fasse bouger la position de la page.
+if ('scrollRestoration' in history) history.scrollRestoration='manual';
+window.addEventListener('pageshow',()=>{ if(!location.hash && window.scrollY < 180) window.scrollTo(0,0); });
+
 // Avis voyageurs : chargement depuis avis.json et défilement automatique sur la page d'accueil.
 (async function initReviewCarousel(){
   const track=document.getElementById('reviewTrack');
@@ -204,7 +209,8 @@ const todayIso=iso(new Date());document.querySelectorAll('input[type="date"]').f
   if(!reviews.length)return;
   const average=reviews.reduce((sum,r)=>sum+Number(r.score||0),0)/reviews.length;
   if(avgEl)avgEl.textContent=average.toFixed(1).replace('.',',');
-  track.innerHTML=reviews.map((r,i)=>`<blockquote class="review-slide${i===0?' active':''}" data-index="${i}"><div class="review-score">${escapeHtml(r.score)} / 10</div><p>« ${escapeHtml(r.text)} »</p><footer>${[r.name,r.city,r.stay].filter(Boolean).map(escapeHtml).join(' · ')}</footer></blockquote>`).join('');
+  const reviewSizeClass=text=>{const n=String(text||'').length;return n>520?' review-xlong':n>360?' review-long':n>220?' review-medium':''};
+  track.innerHTML=reviews.map((r,i)=>`<blockquote class="review-slide${reviewSizeClass(r.text)}${i===0?' active':''}" data-index="${i}"><div class="review-score">${escapeHtml(r.score)} / 10</div><p>« ${escapeHtml(r.text)} »</p><footer>${[r.name,r.city,r.stay].filter(Boolean).map(escapeHtml).join(' · ')}</footer></blockquote>`).join('');
   dots.innerHTML=reviews.map((_,i)=>`<button type="button" class="review-dot${i===0?' active':''}" aria-label="Afficher l’avis ${i+1}" data-index="${i}"></button>`).join('');
   const slides=[...track.querySelectorAll('.review-slide')];
   const dotButtons=[...dots.querySelectorAll('.review-dot')];

@@ -103,3 +103,5 @@ SEO V4.10
 - Nouvelle page /decouvrir-beaujolais.html pour le référencement local.
 - Titres, descriptions, Open Graph et textes alternatifs optimisés.
 - Demain : ajouter le domaine à Google Search Console, envoyer sitemap.xml et demander l'indexation des 3 pages publiques.
+
+V4.12 : carrousel d'avis à hauteur stable, police adaptative selon la longueur, auteur/date/note toujours visibles, prévention des décalages de page liés au chargement asynchrone des avis.

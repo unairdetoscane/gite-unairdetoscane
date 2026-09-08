@@ -71,16 +71,16 @@
       <div class="wrap">
         <div class="section-head"><div><div class="eyebrow">Visite</div><h2>Le charme du lieu, pièce par pièce</h2></div><p>Découvrez les espaces du gîte, de la cour privative aux chambres et pièces de vie.</p></div>
         <div class="gallery gallery-real">
-          <figure class="tall"><img src="assets/images/cour.png" alt="Cour privative du gîte de charme Un air de Toscane dans le Beaujolais" loading="lazy"><figcaption>Cour privative</figcaption></figure>
-          <figure><img src="assets/images/bibliotheque.png" alt="Salon bibliothèque du gîte 5 étoiles Un air de Toscane dans le Beaujolais" loading="lazy"><figcaption>Salon bibliothèque</figcaption></figure>
-          <figure><img src="assets/images/chambre-gamay.png" alt="Chambre Gamay du gîte Un air de Toscane à Salles-Arbuissonnas-en-Beaujolais" loading="lazy"><figcaption>Chambre Gamay</figcaption></figure>
-          <figure class="wide"><img src="assets/images/salle-a-manger.png" alt="Salle à manger du gîte de charme Un air de Toscane dans le Rhône" loading="lazy"><figcaption>Salle à manger</figcaption></figure>
-          <figure><img src="assets/images/chambre-prieure.png" alt="Chambre Le Prieuré du gîte Un air de Toscane dans le Beaujolais" loading="lazy"><figcaption>Chambre Le Prieuré</figcaption></figure>
-          <figure><img src="assets/images/cuisine.png" alt="Cuisine équipée du gîte 5 étoiles Un air de Toscane dans le Beaujolais" loading="lazy"><figcaption>Cuisine équipée</figcaption></figure>
-          <figure><img src="assets/images/douche.png" alt="Salle de douche du gîte Un air de Toscane à Salles-Arbuissonnas" loading="lazy"><figcaption>Douche</figcaption></figure>
-          <figure><img src="assets/images/baignoire.png" alt="Salle de bains avec baignoire du gîte Un air de Toscane" loading="lazy"><figcaption>Baignoire</figcaption></figure>
-          <figure><img src="assets/images/chambre-gamay-2.png" alt="Chambre du gîte de charme Un air de Toscane dans le Beaujolais" loading="lazy"><figcaption>Chambre</figcaption></figure>
-          <figure><img src="assets/images/wc.png" alt="WC indépendant du gîte Un air de Toscane" loading="lazy"><figcaption>WC indépendant</figcaption></figure>
+          <figure class="tall"><img src="assets/images/cour.png" alt="Cour privative du gîte de charme Un air de Toscane dans le Beaujolais" loading="lazy" width="1536" height="1024"><figcaption>Cour privative</figcaption></figure>
+          <figure><img src="assets/images/bibliotheque.png" alt="Salon bibliothèque du gîte 5 étoiles Un air de Toscane dans le Beaujolais" loading="lazy" width="1536" height="1024"><figcaption>Salon bibliothèque</figcaption></figure>
+          <figure><img src="assets/images/chambre-gamay.png" alt="Chambre Gamay du gîte Un air de Toscane à Salles-Arbuissonnas-en-Beaujolais" loading="lazy" width="1536" height="1024"><figcaption>Chambre Gamay</figcaption></figure>
+          <figure class="wide"><img src="assets/images/salle-a-manger.png" alt="Salle à manger du gîte de charme Un air de Toscane dans le Rhône" loading="lazy" width="1536" height="1024"><figcaption>Salle à manger</figcaption></figure>
+          <figure><img src="assets/images/chambre-prieure.png" alt="Chambre Le Prieuré du gîte Un air de Toscane dans le Beaujolais" loading="lazy" width="1536" height="1024"><figcaption>Chambre Le Prieuré</figcaption></figure>
+          <figure><img src="assets/images/cuisine.png" alt="Cuisine équipée du gîte 5 étoiles Un air de Toscane dans le Beaujolais" loading="lazy" width="1536" height="1024"><figcaption>Cuisine équipée</figcaption></figure>
+          <figure><img src="assets/images/douche.png" alt="Salle de douche du gîte Un air de Toscane à Salles-Arbuissonnas" loading="lazy" width="1024" height="1536"><figcaption>Douche</figcaption></figure>
+          <figure><img src="assets/images/baignoire.png" alt="Salle de bains avec baignoire du gîte Un air de Toscane" loading="lazy" width="1024" height="1536"><figcaption>Baignoire</figcaption></figure>
+          <figure><img src="assets/images/chambre-gamay-2.png" alt="Chambre du gîte de charme Un air de Toscane dans le Beaujolais" loading="lazy" width="1024" height="1024"><figcaption>Chambre</figcaption></figure>
+          <figure><img src="assets/images/wc.png" alt="WC indépendant du gîte Un air de Toscane" loading="lazy" width="1024" height="1536"><figcaption>WC indépendant</figcaption></figure>
         </div>
       </div>
     </section>
@@ -102,8 +102,20 @@
           <h2>Choisissez vos dates</h2>
           <p class="booking-intro"><strong>150 € par nuit jusqu’à 4 personnes</strong>, pour un séjour de 2 nuits minimum. Au-delà de 4 personnes, ajoutez 15 € par personne supplémentaire et par nuit. Capacité maximale : 6 personnes au total. <strong>Taxe de séjour en supplément, à régler sur place.</strong> <strong>Les animaux de compagnie ne sont pas admis.</strong></p>
           <div class="date-search">
-            <label>Arrivée<input id="arrival" type="date"></label>
-            <label>Départ<input id="departure" type="date"></label>
+            <label class="date-field">Arrivée
+              <div class="mobile-date-box">
+                <span class="mobile-date-text" data-date-display="arrival">jj/mm/aaaa</span>
+                <span class="mobile-date-icon" aria-hidden="true"></span>
+                <input id="arrival" type="date" aria-label="Date d’arrivée">
+              </div>
+            </label>
+            <label class="date-field">Départ
+              <div class="mobile-date-box">
+                <span class="mobile-date-text" data-date-display="departure">jj/mm/aaaa</span>
+                <span class="mobile-date-icon" aria-hidden="true"></span>
+                <input id="departure" type="date" aria-label="Date de départ">
+              </div>
+            </label>
             <label class="guest-select-field">Adultes<select id="guestCount" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
             <label class="guest-select-field">Enfants<select id="childCount"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
             <button class="btn primary" id="checkDates" type="button">Vérifier</button>
@@ -173,7 +185,22 @@
         <form id="requestForm" class="request-form" action="https://formspree.io/f/mkjnqvoj" method="POST">
           <div class="form-row"><label>Nom et prénom<input name="name" required></label><label>Téléphone<input name="phone" type="tel"></label></div>
           <label>E-mail<input name="email" type="email" required></label>
-          <div class="form-row"><label>Arrivée<input name="arrival" type="date" required></label><label>Départ<input name="departure" type="date" required></label></div>
+          <div class="form-row">
+            <label class="date-field">Arrivée
+              <div class="mobile-date-box">
+                <span class="mobile-date-text">jj/mm/aaaa</span>
+                <span class="mobile-date-icon" aria-hidden="true"></span>
+                <input id="formArrival" name="arrival" type="date" required aria-label="Date d’arrivée">
+              </div>
+            </label>
+            <label class="date-field">Départ
+              <div class="mobile-date-box">
+                <span class="mobile-date-text">jj/mm/aaaa</span>
+                <span class="mobile-date-icon" aria-hidden="true"></span>
+                <input id="formDeparture" name="departure" type="date" required aria-label="Date de départ">
+              </div>
+            </label>
+          </div>
           <div class="form-row"><label>Nombre d’adultes<select name="adults" required><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label><label>Nombre d’enfants<select name="children" id="formChildCount"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label></div>
           <div id="childAgesForm" class="child-ages child-ages-form" aria-live="polite"></div>
           <div id="formPricePreview" class="form-price-preview" aria-live="polite">Sélectionnez vos dates et le nombre de personnes pour obtenir le montant du séjour. Taxe de séjour en supplément, à régler sur place. Les animaux de compagnie ne sont pas admis.</div>

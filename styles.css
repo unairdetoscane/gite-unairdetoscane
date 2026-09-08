@@ -178,75 +178,284 @@
 @media(max-width:800px){.nearby-groups{grid-template-columns:1fr}}
 @media(max-width:520px){.nearby-group-title{padding:20px}.nearby-list{padding:6px 20px 14px}.nearby-item{gap:12px}.nearby-item b{font-size:.88rem}}
 
-/* V4.22 — champs de dates réellement responsifs sur mobile (iOS/Android) */
-.date-search > label{min-width:0;max-width:100%}
-.date-search input[type="date"]{display:block;min-width:0;max-width:100%;width:100%;box-sizing:border-box}
-@media(max-width:700px){
-  .date-search{width:100%;max-width:100%;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .date-search > *{min-width:0;max-width:100%}
-  .date-search input[type="date"]{min-width:0;width:100%;font-size:16px;padding-left:10px;padding-right:6px}
-}
-@media(max-width:520px){
-  .date-search{grid-template-columns:minmax(0,1fr)}
-  .date-search #checkDates,.date-search .reserve-jump{grid-column:auto;width:100%}
-}
 
-/* V4.23 — correction définitive mobile : dates + ancres du menu */
-#tarifs,#gite,#photos,#reserver{scroll-margin-top:88px}
-.booking-grid > *, .date-search > *, .form-row > *{min-width:0}
-input[type="date"]{
-  box-sizing:border-box;
-  inline-size:100%;
-  width:100%;
-  min-inline-size:0;
+/* V4.28 — champs date mobiles propres et stables */
+.date-field{
   min-width:0;
-  max-inline-size:100%;
   max-width:100%;
 }
-@media(max-width:700px){
-  /* Sur téléphone/tablette étroite, on abandonne la grille pour éviter
-     la largeur intrinsèque imposée par les champs date natifs. */
+.mobile-date-box{
+  position:relative;
+  display:flex;
+  align-items:center;
+  width:100%;
+  height:48px;
+  margin-top:5px;
+  box-sizing:border-box;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:10px;
+  background:#fff;
+  overflow:hidden;
+}
+.request-form .mobile-date-box{
+  border-color:var(--line);
+}
+.mobile-date-text{
+  display:block;
+  min-width:0;
+  flex:1;
+  padding:0 42px 0 14px;
+  color:var(--ink);
+  font-size:16px;
+  font-weight:600;
+  line-height:48px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.mobile-date-icon{
+  position:absolute;
+  z-index:2;
+  right:13px;
+  top:50%;
+  width:18px;
+  height:18px;
+  transform:translateY(-50%);
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:18px 18px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%232e2c28' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M16 3v4M8 3v4M3 10h18'/%3E%3C/svg%3E");
+}
+.mobile-date-box input[type="date"]{
+  position:absolute!important;
+  inset:0!important;
+  z-index:3;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  opacity:0!important;
+  appearance:auto!important;
+  -webkit-appearance:auto!important;
+  cursor:pointer;
+}
+
+/* réserve la hauteur des photos avant leur chargement, pour éviter
+   que le lien Tarifs se décale après coup */
+#photos .gallery.gallery-real img[width][height]{
+  height:auto!important;
+  aspect-ratio:attr(width) / attr(height);
+}
+
+/* 4 champs sur la 1re ligne, boutons sur la ligne suivante */
+@media (min-width:701px){
   .date-search{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    max-width:100%;
-    gap:10px;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
   }
+  .date-search #checkDates,
+  .date-search .reserve-jump{
+    grid-row:2;
+    width:auto!important;
+    min-width:120px;
+  }
+  .date-search #checkDates{grid-column:1}
+  .date-search .reserve-jump{grid-column:2}
+}
+
+/* téléphone : mêmes dimensions pour dates, Adultes et Enfants */
+@media (max-width:700px){
+  .date-search{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+    width:100%!important;
+    max-width:100%!important;
+    overflow:visible!important;
+  }
+
   .date-search > label,
   .date-search > button,
   .date-search > a{
-    display:flex;
-    flex-direction:column;
     width:100%!important;
     min-width:0!important;
     max-width:100%!important;
   }
-  .date-search input[type="date"],
-  .request-form input[type="date"]{
-    display:block;
-    width:100%!important;
-    min-width:0!important;
-    max-width:100%!important;
-    inline-size:100%!important;
-    min-inline-size:0!important;
-    max-inline-size:100%!important;
-    font-size:16px;
-    overflow:hidden;
-  }
-  .date-search .guest-select-field,
+
+  .mobile-date-box,
   .date-search .guest-select-field select{
     width:100%!important;
     min-width:0!important;
     max-width:100%!important;
+    height:48px!important;
+    box-sizing:border-box!important;
   }
+
   .date-search #checkDates,
   .date-search .reserve-jump{
     width:100%!important;
-    grid-column:auto;
+  }
+
+  .request-form,
+  .form-row,
+  .request-form label,
+  .request-form .mobile-date-box{
+    min-width:0!important;
+    max-width:100%!important;
   }
 }
-@media(max-width:600px){
-  .request-form,.form-row,.request-form label{min-width:0;max-width:100%}
-  .request-form input[type="date"]{width:100%!important;max-width:100%!important}
+
+
+/* V4.29 — alignement des 4 champs sur ordinateur */
+@media (min-width:701px){
+  .date-search{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    column-gap:10px!important;
+  }
+
+  .date-search > label{
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  .date-search .mobile-date-box,
+  .date-search .guest-select-field select{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+}
+
+
+/* V4.30 — corrections finales menu mobile + champs date + alignement PC */
+
+/* Le vrai input date est totalement sorti de l'affichage.
+   Il ne peut donc plus faire apparaître un second "jj/mm/aaaa". */
+.mobile-date-box input[type="date"]{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  min-width:1px!important;
+  max-width:1px!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  opacity:0!important;
+  overflow:hidden!important;
+  clip:rect(0 0 0 0)!important;
+  clip-path:inset(50%)!important;
+  white-space:nowrap!important;
+  pointer-events:none!important;
+}
+
+/* Ordinateur : les colonnes Adultes et Enfants font exactement la largeur
+   des listes, avec le même écart de 10px qu'entre les autres champs. */
+@media (min-width:701px){
+  .date-search{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) 108px 108px!important;
+    column-gap:10px!important;
+    row-gap:10px!important;
+    align-items:end!important;
+  }
+
+  .date-search .guest-select-field{
+    width:108px!important;
+    min-width:108px!important;
+    max-width:108px!important;
+    justify-self:start!important;
+  }
+
+  .date-search .guest-select-field select{
+    width:108px!important;
+    min-width:108px!important;
+    max-width:108px!important;
+  }
+
+  .date-search #checkDates{
+    grid-column:1!important;
+    grid-row:2!important;
+  }
+
+  .date-search .reserve-jump{
+    grid-column:2!important;
+    grid-row:2!important;
+  }
+}
+
+/* Téléphone/tablette : menu toujours visible en haut de l'écran */
+@media (max-width:900px){
+  body{
+    padding-top:76px!important;
+  }
+
+  .site-header{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:9999!important;
+  }
+}
+
+@media (max-width:600px){
+  body{
+    padding-top:68px!important;
+  }
+}
+
+
+/* V4.31 — PC uniquement : toute la zone de date ouvre le calendrier.
+   Ne modifie pas le comportement mobile. */
+@media (min-width:901px){
+  .mobile-date-box input[type="date"]{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    opacity:0.001!important;
+    overflow:visible!important;
+    clip:auto!important;
+    clip-path:none!important;
+    pointer-events:auto!important;
+    cursor:pointer!important;
+  }
+}
+
+
+/* V4.32 — correction PC : le clic est capté par toute la boîte,
+   puis le JavaScript ouvre le calendrier avec showPicker().
+   On neutralise l'overlay natif de V4.31 qui interceptait le clic. */
+@media (min-width:901px){
+  .mobile-date-box{
+    cursor:pointer!important;
+  }
+
+  .mobile-date-box input[type="date"]{
+    position:absolute!important;
+    width:1px!important;
+    height:1px!important;
+    min-width:1px!important;
+    max-width:1px!important;
+    inset:auto!important;
+    right:0!important;
+    bottom:0!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    opacity:0!important;
+    overflow:hidden!important;
+    clip:rect(0 0 0 0)!important;
+    clip-path:inset(50%)!important;
+    pointer-events:none!important;
+  }
 }

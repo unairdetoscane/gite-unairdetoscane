@@ -117,12 +117,28 @@ function totalCapacityOK(adults,children){return adults+children<=cfg.maxGuests}
 const topChildCount=document.getElementById('childCount');
 if(topChildCount)topChildCount.addEventListener('change',()=>renderChildAges('childAgesTop',Number(topChildCount.value),false));
 
+function setReservationDate(input,value){
+  if(!input) return;
+  input.value=value || '';
+  const display=input.closest('.mobile-date-box')?.querySelector('.mobile-date-text');
+  if(display){
+    if(value){
+      const [y,m,d]=value.split('-');
+      display.textContent=(y&&m&&d)?`${d}/${m}/${y}`:value;
+    }else{
+      display.textContent='jj/mm/aaaa';
+    }
+  }
+  input.dispatchEvent(new Event('input',{bubbles:true}));
+  input.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
 function syncTopToForm(){
   const av=document.getElementById('arrival').value,de=document.getElementById('departure').value;
   const adults=Number(document.getElementById('guestCount').value),children=Number(document.getElementById('childCount').value);
   const ages=getChildAges('childAgesTop');
-  form.querySelector('[name="arrival"]').value=av;
-  form.querySelector('[name="departure"]').value=de;
+  setReservationDate(form.querySelector('[name="arrival"]'),av);
+  setReservationDate(form.querySelector('[name="departure"]'),de);
   form.querySelector('[name="adults"]').value=String(adults);
   form.querySelector('[name="children"]').value=String(children);
   renderChildAges('childAgesForm',children,true,ages);
@@ -215,6 +231,8 @@ const todayIso=iso(new Date());document.querySelectorAll('input[type="date"]').f
 
 
 // Évite qu'un chargement asynchrone des avis ne fasse bouger la position de la page.
+
+
 if ('scrollRestoration' in history) history.scrollRestoration='manual';
 window.addEventListener('pageshow',()=>{ if(!location.hash && window.scrollY < 180) window.scrollTo(0,0); });
 
@@ -293,3 +311,140 @@ window.addEventListener('pageshow',()=>{ if(!location.hash && window.scrollY < 1
   carousel?.addEventListener('mouseleave',restart);
   restart();
 })();
+
+
+
+
+// V4.28 — affiche la date dans la boîte sans laisser Safari afficher
+// son propre "jj/mm/aaaa" hors du champ.
+function formatDateForDisplay(value){
+  if(!value) return 'jj/mm/aaaa';
+  const [y,m,d]=value.split('-');
+  return (y && m && d) ? `${d}/${m}/${y}` : value;
+}
+document.querySelectorAll('.mobile-date-box input[type="date"]').forEach(input=>{
+  const box=input.closest('.mobile-date-box');
+  const display=box?.querySelector('.mobile-date-text');
+  const sync=()=>{ if(display) display.textContent=formatDateForDisplay(input.value); };
+  input.addEventListener('change',sync);
+  input.addEventListener('input',sync);
+  sync();
+});
+
+// V4.28 — navigation fiable depuis une autre page.
+// On attend que la mise en page soit stabilisée puis on positionne exactement #tarifs.
+function positionRequestedSection(){
+  const params=new URLSearchParams(location.search);
+  const section=params.get('go');
+  if(!section) return;
+
+  const target=document.getElementById(section);
+  if(!target) return;
+
+  const scrollNow=()=>{
+    const header=document.querySelector('.site-header');
+    const offset=(header?.offsetHeight || 0)+8;
+    const top=Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+    window.scrollTo(0, top);
+  };
+
+  // plusieurs recalages courts couvrent Safari + bfcache sans animation parasite
+  scrollNow();
+  requestAnimationFrame(()=>requestAnimationFrame(scrollNow));
+  [120,300,700,1200].forEach(ms=>setTimeout(scrollNow,ms));
+
+  // si une image située avant la section finit malgré tout de charger,
+  // on recale immédiatement la section
+  document.querySelectorAll('#photos img').forEach(img=>{
+    if(!img.complete){
+      img.addEventListener('load',scrollNow,{once:true});
+      img.addEventListener('error',scrollNow,{once:true});
+    }
+  });
+}
+window.addEventListener('DOMContentLoaded',positionRequestedSection);
+window.addEventListener('load',positionRequestedSection);
+window.addEventListener('pageshow',positionRequestedSection);
+
+
+// V4.30 — ouverture du calendrier en cliquant sur toute la zone visuelle.
+// Le champ natif reste caché : aucun "jj/mm/aaaa" supplémentaire ne peut s'afficher.
+document.querySelectorAll('.mobile-date-box').forEach(box=>{
+  const input=box.querySelector('input[type="date"]');
+  if(!input) return;
+
+  box.style.cursor='pointer';
+  box.addEventListener('click',()=>{
+    try{
+      if(typeof input.showPicker==='function'){
+        input.showPicker();
+      }else{
+        input.focus({preventScroll:true});
+        input.click();
+      }
+    }catch(e){
+      input.focus({preventScroll:true});
+      input.click();
+    }
+  });
+});
+
+
+// V4.34 — le bouton Réserver reprend systématiquement toutes les valeurs du bloc tarifs.
+document.querySelectorAll('.reserve-jump').forEach(el=>{
+  el.addEventListener('click',()=>{
+    syncTopToForm();
+    updateFormPrice();
+  });
+});
+
+
+// V4.35 — synchronisation directe et sans ambiguïté des dates
+// du bloc Tarifs vers le formulaire de réservation.
+function copyAvailabilityDatesToBookingForm(){
+  const topArrival=document.getElementById('arrival');
+  const topDeparture=document.getElementById('departure');
+  const formArrival=document.getElementById('formArrival');
+  const formDeparture=document.getElementById('formDeparture');
+
+  if(!topArrival || !topDeparture || !formArrival || !formDeparture) return;
+
+  const apply=(source,target)=>{
+    target.value=source.value || '';
+
+    const targetText=target.closest('.mobile-date-box')?.querySelector('.mobile-date-text');
+    if(targetText){
+      if(source.value){
+        const [y,m,d]=source.value.split('-');
+        targetText.textContent=(y && m && d) ? `${d}/${m}/${y}` : source.value;
+      }else{
+        targetText.textContent='jj/mm/aaaa';
+      }
+    }
+
+    target.dispatchEvent(new Event('input',{bubbles:true}));
+    target.dispatchEvent(new Event('change',{bubbles:true}));
+  };
+
+  apply(topArrival,formArrival);
+  apply(topDeparture,formDeparture);
+}
+
+// Synchronisation immédiate dès qu'une date est choisie en haut.
+['arrival','departure'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el){
+    el.addEventListener('input',copyAvailabilityDatesToBookingForm);
+    el.addEventListener('change',copyAvailabilityDatesToBookingForm);
+  }
+});
+
+// Et synchronisation forcée avant le saut vers le formulaire.
+const reserveButtonV435=document.getElementById('reserveJump');
+if(reserveButtonV435){
+  reserveButtonV435.addEventListener('click',()=>{
+    copyAvailabilityDatesToBookingForm();
+    setTimeout(copyAvailabilityDatesToBookingForm,0);
+    setTimeout(copyAvailabilityDatesToBookingForm,80);
+  },true);
+}

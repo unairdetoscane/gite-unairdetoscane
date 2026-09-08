@@ -126,3 +126,49 @@
 .subhero{background:var(--deep);color:#fff;padding:88px 0 82px}.subhero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(3rem,7vw,5.8rem);line-height:1;margin:.55rem 0 1rem;font-weight:400}.subhero p{max-width:700px;color:#d8ddd9;font-size:1.08rem}.reviews-page-section{padding-top:70px}.reviews-summary-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;background:var(--cream);border:1px solid #eadfce;border-radius:20px;padding:26px 30px;margin-bottom:28px}.summary-score{font-family:Georgia,"Times New Roman",serif;font-size:3.4rem;line-height:1}.summary-outof{font-size:1rem;color:var(--muted)}.reviews-summary-card strong{font-family:Georgia,"Times New Roman",serif;font-size:1.35rem}.reviews-summary-card p{margin:2px 0 0;color:var(--muted);font-size:.85rem}.reviews-list{display:grid;gap:16px}.review-full-card{display:grid;grid-template-columns:120px 1fr;gap:28px;padding:30px;border:1px solid var(--line);border-radius:18px;background:#fff}.review-full-card h2{font-size:1.6rem;margin:0 0 .7rem}.review-full-card p{margin:0 0 1rem;color:#4f4b45}.review-full-card footer{color:var(--muted);font-size:.82rem}.review-full-score{font-family:Georgia,"Times New Roman",serif;font-size:1.55rem;color:var(--terracotta);font-weight:700}.review-form-section{background:#5f3d31;color:#fff}.review-form-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:start}.review-form-section h2{font-size:3.5rem}.review-form-section>div>div>p{color:#eadbd4}.review-form-note{font-size:.86rem;color:#d7c0b8!important}.review-form{color:var(--ink)}.consent-row{display:flex!important;gap:10px;align-items:flex-start;font-weight:500!important;font-size:.8rem!important;line-height:1.45}.consent-row input{width:auto!important;margin:4px 0 0!important;flex:0 0 auto}
 @media(max-width:900px){.reviews-title-row{align-items:flex-start;flex-direction:column}.reviews-summary-card{grid-template-columns:auto 1fr}.reviews-summary-card .btn{grid-column:1/-1}.review-form-grid{grid-template-columns:1fr;gap:36px}.review-carousel{height:360px}.review-slide{padding:30px 70px}.review-full-card{grid-template-columns:95px 1fr}}
 @media(max-width:600px){.review-carousel{height:430px}.review-track{height:100%}.review-slide{padding:30px 52px}.review-arrow{width:36px;height:36px}.review-arrow.prev{left:10px}.review-arrow.next{right:10px}.reviews-summary-card{grid-template-columns:1fr;gap:10px}.reviews-summary-card .btn{grid-column:auto}.review-full-card{grid-template-columns:1fr;gap:8px;padding:24px}.subhero{padding:64px 0}.review-form-section h2{font-size:2.7rem}}
+
+/* V4.16 — Galerie photos : présentation en mosaïque naturelle.
+   Les images conservent leur cadrage d'origine : les photos verticales
+   (douche, baignoire, WC) restent réellement en portrait. */
+#photos .gallery.gallery-real{
+  display:block;
+  columns:3 300px;
+  column-gap:16px;
+  grid-template-columns:none;
+  grid-auto-rows:initial;
+}
+#photos .gallery.gallery-real figure,
+#photos .gallery.gallery-real figure.tall,
+#photos .gallery.gallery-real figure.wide{
+  display:inline-block;
+  width:100%;
+  height:auto!important;
+  min-height:0!important;
+  margin:0 0 16px!important;
+  break-inside:avoid;
+  -webkit-column-break-inside:avoid;
+  border-radius:16px;
+  vertical-align:top;
+  background:#ddd;
+}
+#photos .gallery.gallery-real figure img{
+  display:block;
+  width:100%;
+  height:auto!important;
+  min-height:0;
+  object-fit:initial;
+  border-radius:16px;
+}
+#photos .gallery.gallery-real figcaption{
+  border-radius:0 0 16px 16px;
+}
+@media(max-width:900px){
+  #photos .gallery.gallery-real{columns:2 260px;}
+}
+@media(max-width:600px){
+  #photos .gallery.gallery-real{columns:1;}
+  #photos .gallery.gallery-real figure,
+  #photos .gallery.gallery-real figure.tall,
+  #photos .gallery.gallery-real figure.wide{height:auto!important;}
+  #photos .gallery.gallery-real figure img{height:auto!important;}
+}

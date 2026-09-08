@@ -16,12 +16,17 @@ let view=new Date();view=new Date(view.getFullYear(),view.getMonth(),1);const mo
 function renderCalendar(){const cal=document.getElementById('calendar');cal.innerHTML='';document.getElementById('calendarTitle').textContent=`${months[view.getMonth()]} ${view.getFullYear()}`;const first=(view.getDay()+6)%7;const start=new Date(view.getFullYear(),view.getMonth(),1-first);const today=new Date();today.setHours(0,0,0,0);for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const el=document.createElement('div');el.className='day';if(d.getMonth()!==view.getMonth())el.classList.add('other');if(isBooked(d))el.classList.add('booked');if(d.getTime()===today.getTime())el.classList.add('today');el.textContent=d.getDate();el.title=isBooked(d)?'Réservé':`${cfg.baseNightlyRate} € / nuit jusqu’à ${cfg.baseGuests} personnes`;cal.appendChild(el)}}
 renderCalendar();
 async function loadBookingAvailability(){
-  // Le workflow GitHub met bien availability.json à jour dans le dépôt, mais un commit
-  // réalisé par GitHub Actions ne redéploie pas toujours GitHub Pages. On lit donc
-  // directement le fichier brut du dépôt public, puis on utilise le fichier local en secours.
+  // Chaque site lit le calendrier de SON dépôt. Sur github.io, le nom du dépôt
+  // est déduit automatiquement du premier segment de l'URL (ex. gite-unairdetoscane-test).
+  // Sur le domaine public, on utilise le dépôt principal. Le fichier local reste en secours.
+  const githubOwner='unairdetoscane';
+  const isGithubPages=location.hostname.toLowerCase()===`${githubOwner}.github.io`;
+  const pathParts=location.pathname.split('/').filter(Boolean);
+  const githubRepo=isGithubPages && pathParts.length ? pathParts[0] : 'gite-unairdetoscane';
+  const stamp=Date.now();
   const sources=[
-    `https://raw.githubusercontent.com/unairdetoscane/gite-unairdetoscane/main/availability.json?ts=${Date.now()}`,
-    `availability.json?ts=${Date.now()}`
+    `https://raw.githubusercontent.com/${githubOwner}/${githubRepo}/main/availability.json?ts=${stamp}`,
+    `availability.json?ts=${stamp}`
   ];
   let lastError=null;
   try{

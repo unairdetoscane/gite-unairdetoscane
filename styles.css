@@ -569,3 +569,15 @@
 @media (max-width:900px){
   .desktop-date-picker{display:none!important;}
 }
+
+/* V4.38 — pictogrammes plus explicites dans le bandeau principal */
+.fact-icon-svg svg{
+  width:18px;
+  height:18px;
+  display:block;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}

@@ -244,7 +244,8 @@
         "https://www.unairdetoscane-gite.fr/assets/images/bibliotheque.webp",
         "https://www.unairdetoscane-gite.fr/assets/images/douche.webp",
         "https://www.unairdetoscane-gite.fr/assets/images/baignoire.webp",
-        "https://www.unairdetoscane-gite.fr/assets/images/wc.webp"
+        "https://www.unairdetoscane-gite.fr/assets/images/wc.webp",
+        "https://www.unairdetoscane-gite.fr/assets/images/chambre-gamay-2.webp"
       ],
       "latitude": 46.03916,
       "longitude": 4.63317,
@@ -258,53 +259,102 @@
       },
       "telephone": "+33649486033",
       "priceRange": "150–180 € / nuit",
-      "floorSize": {
-        "@type": "QuantitativeValue",
-        "value": 105,
-        "unitCode": "MTK"
-      },
+      "checkinTime": "16:00:00+02:00",
+      "checkoutTime": "11:00:00+02:00",
+      "knowsLanguage": [
+        "fr-FR"
+      ],
       "containsPlace": {
         "@type": "Accommodation",
+        "additionalType": "EntirePlace",
         "occupancy": {
           "@type": "QuantitativeValue",
           "value": 6
         },
+        "floorSize": {
+          "@type": "QuantitativeValue",
+          "value": 105,
+          "unitCode": "MTK"
+        },
         "numberOfBedrooms": 2,
         "numberOfBathroomsTotal": 2,
+        "bed": [
+          {
+            "@type": "BedDetails",
+            "numberOfBeds": 2,
+            "typeOfBed": "Queen"
+          },
+          {
+            "@type": "BedDetails",
+            "numberOfBeds": 1,
+            "typeOfBed": "Double"
+          }
+        ],
         "amenityFeature": [
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Wi-Fi",
+            "name": "wifi",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Climatisation",
+            "name": "internetType",
+            "value": "Free"
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "ac",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Parking privé",
+            "name": "parkingType",
+            "value": "Free"
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "patio",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Terrasse et cour privées",
+            "name": "outdoorGrill",
             "value": true
           },
           {
             "@type": "LocationFeatureSpecification",
-            "name": "Barbecue",
+            "name": "kitchen",
             "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "fireplace",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "childFriendly",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "petsAllowed",
+            "value": false
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "smokingAllowed",
+            "value": false
           }
         ]
       },
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": 9.5,
+        "ratingValue": 9.75,
         "bestRating": 10,
         "worstRating": 1,
-        "ratingCount": 2
+        "ratingCount": 4,
+        "reviewCount": 4
       }
     }
   ]

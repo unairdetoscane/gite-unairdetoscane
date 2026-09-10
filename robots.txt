@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.gite-unairdetoscane.fr/sitemap.xml
+Sitemap: https://www.unairdetoscane-gite.fr/sitemap.xml

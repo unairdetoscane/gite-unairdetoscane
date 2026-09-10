@@ -96,7 +96,7 @@ V4.5 : correction visuelle des listes Adultes et Enfants : la valeur sélectionn
 
 
 SEO V4.10
-- Domaine canonique : https://www.gite-unairdetoscane.fr/
+- Domaine canonique : https://www.unairdetoscane-gite.fr/
 - Sitemap : /sitemap.xml
 - Robots : /robots.txt
 - Données structurées VacationRental + WebSite intégrées à l'accueil.

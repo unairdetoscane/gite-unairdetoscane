@@ -1,6 +1,470 @@
 {
   "reviews": [
     {
+    "score": 10,
+    "title": "Belle découverte",
+    "name": "Aurélie",
+    "city": "Rennes",
+    "stay": "Septembre 2026",
+    "text": "On ne connaissait absolument pas le Beaujolais en dehors du vin... grosse surprise. C'est vraiment très beau. Le gîte est grand, au calme, très bien tenu et on a très bien dormi. Merci pour les bonnes adresses aussi."
+  },
+  {
+    "score": 9,
+    "title": "3 jours au vert",
+    "name": "Damien",
+    "city": "Paris",
+    "stay": "Septembre 2026",
+    "text": "Trois jours beaucoup trop courts. Maison agréable, propre, bonne literie. Le village est vraiment joli."
+  },
+  {
+    "score": 10,
+    "title": "Parfait en famille",
+    "name": "Élodie",
+    "city": "Nantes",
+    "stay": "Août 2026",
+    "text": "Nous étions 5 avec nos amis. De la place pour tout le monde, une vraie cuisine, de grandes chambres et la climatisation qui nous a sauvé la vie pendant les deux journées très chaudes ! Très bon contact avec les propriétaires."
+  },
+  {
+    "score": 9,
+    "title": "Le Beaujolais",
+    "name": "Jean-Pierre",
+    "city": "Le Mans",
+    "stay": "Août 2026",
+    "text": "Très belle région. Nous avons beaucoup roulé dans les environs, Oingt, les villages, les vignes, Villefranche. Le logement nous a parfaitement convenu pour la semaine."
+  },
+  {
+    "score": 10,
+    "title": "Super semaine",
+    "name": "Camille",
+    "city": "Brest",
+    "stay": "Juillet 2026",
+    "text": "On s'est senti bien dès l'arrivée. Ce n'est pas une location froide et standardisée, il y a des meubles, des livres, une déco, bref une vraie maison. Très propre également. Les enfants ont adoré les jeux et nous les petites soirées dehors."
+  },
+  {
+    "score": 10,
+    "title": "Un très bel endroit",
+    "name": "Martin",
+    "city": "London",
+    "stay": "Juillet 2026",
+    "text": "A beautiful and very comfortable house. We stayed for five nights with our children and really enjoyed the area. Very clean, quiet at night and a warm welcome from our hosts. Beaujolais was a wonderful discovery for us."
+  },
+  {
+    "score": 8,
+    "title": "Bon séjour",
+    "name": "Cédric",
+    "city": "Grenoble",
+    "stay": "Juin 2026",
+    "text": "Gite agréable et spacieux. Nous étions là principalement pour un mariage donc peu présents dans la journée mais rien à redire."
+  },
+  {
+    "score": 10,
+    "title": "Quel joli coin !",
+    "name": "Martine",
+    "city": "La Rochelle",
+    "stay": "Mai 2026",
+    "text": "Nous avions choisi le logement un peu par hasard pour couper notre trajet et finalement nous sommes restés une nuit supplémentaire. Le village est charmant, les alentours superbes à cette saison. Et surtout quel calme le soir."
+  },
+  {
+    "score": 9,
+    "title": "Très agréable",
+    "name": "Florian",
+    "city": "Metz",
+    "stay": "Mai 2026",
+    "text": "Accueil sympa. Maison propre et bien équipée. Literie vraiment bonne ce qui n'est pas toujours le cas dans les locations."
+  },
+  {
+    "score": 10,
+    "title": "A refaire",
+    "name": "Sonia",
+    "city": "Clermont-Ferrand",
+    "stay": "Avril 2026",
+    "text": "Petit week end entre copines réussi :) On a adoré la maison et la déco. Beaucoup de place, tout était nickel à notre arrivée. On reviendra !"
+  },
+  {
+    "score": 9,
+    "title": "Très bonne adresse",
+    "name": "Laurent",
+    "city": "Dijon",
+    "stay": "Mars 2026",
+    "text": "Maison très confortable. Accueil discret et efficace, aucun souci pour l'arrivée. Parking appréciable. Nous recommandons."
+  },
+  {
+    "score": 10,
+    "title": "Comme à la maison",
+    "name": "Sandrine",
+    "city": "Lyon",
+    "stay": "Février 2026",
+    "text": "C'était notre deuxième séjour et certainement pas le dernier. Toujours aussi propre et chaleureux. A moins d'une heure de Lyon on a vraiment l'impression d'être parti beaucoup plus loin."
+  },
+  {
+    "score": 10,
+    "title": "Noël en Beaujolais",
+    "name": "Béatrice",
+    "city": "Orléans",
+    "stay": "Décembre 2025",
+    "text": "Nous avions loué pour rejoindre notre famille qui habite à proximité. Très agréable de rentrer le soir dans une maison chaleureuse plutôt que dans des chambres d'hôtel. Nous étions quatre adultes, chacun avait son espace. Très bon séjour."
+  },
+  {
+    "score": 9,
+    "title": "Bien",
+    "name": "Olivier",
+    "city": "Chalon-sur-Saône",
+    "stay": "Novembre 2025",
+    "text": "Très propre. Très calme. Bon accueil. Rien à signaler."
+  },
+  {
+    "score": 10,
+    "title": "Un air d'automne",
+    "name": "Catherine",
+    "city": "Tours",
+    "stay": "Octobre 2025",
+    "text": "Les vignes avec les couleurs d'automne sont magnifiques. Rien que pour les routes autour du village le séjour valait le déplacement ! Concernant le gîte : impeccable, confortable et beaucoup plus grand que ce que nous imaginions."
+  },
+  {
+    "score": 9,
+    "title": "Week end réussi",
+    "name": "Mathieu",
+    "city": "Annecy",
+    "stay": "Septembre 2025",
+    "text": "Réservé pour 2 nuits entre amis. Acceuil très sympathique, maison spacieuse et propre. On garde l'adresse."
+  },
+  {
+    "score": 10,
+    "title": "Très belle semaine",
+    "name": "Anne",
+    "city": "Bruxelles",
+    "stay": "Août 2025",
+    "text": "Une région magnifique que nous connaissions très peu. Nous avons alterné visites, randonnées et journées tranquilles. Le logement est très confortable et surtout très bien entretenu. Nous avons aussi beaucoup apprécié les conseils à notre arrivée."
+  },
+  {
+    "score": 8,
+    "title": "Vacances",
+    "name": "François",
+    "city": "Rouen",
+    "stay": "Août 2025",
+    "text": "Bonne semaine dans l'ensemble. Maison agréable, climatisée, bonne literie. Très joli secteur pour qui aime les balades et le vin."
+  },
+  {
+    "score": 10,
+    "title": "On a adoré",
+    "name": "Lucie",
+    "city": "Bordeaux",
+    "stay": "Juillet 2025",
+    "text": "Alors franchement très belle surprise ! On avait surtout réservé pour être proche d'amis mais on a adoré le coin. Le petit village, les pierres, les vignes partout... et une maison où l'on se sent tout de suite bien. Merci pour l'accueil."
+  },
+  {
+    "score": 9,
+    "title": "Calme et confortable",
+    "name": "Christian",
+    "city": "Mulhouse",
+    "stay": "Juillet 2025",
+    "text": "C'est exactement ce que nous recherchions. Du calme la nuit, de l'espace et un logement propre. Très bien."
+  },
+  {
+    "score": 10,
+    "title": "Très bon gîte",
+    "name": "Marion",
+    "city": "Angers",
+    "stay": "Juin 2025",
+    "text": "Deux couples pour quatre jours. Chacun sa chambre, suffisamment d'espace et tout ce qu'il faut pour cuisiner. Nous avons mangé dehors quasiment tous les soirs. Le Beaujolais est une très belle découverte."
+  },
+  {
+    "score": 10,
+    "title": "Excellent",
+    "name": "Hélène",
+    "city": "Montpellier",
+    "stay": "Mai 2025",
+    "text": "Très bel endroit, décoré avec goût sans faire catalogue de magasin ! Literie impeccable, tout est propre. Hôtes accueillants et disponibles lorsque nous avions une question."
+  },
+  {
+    "score": 9,
+    "title": "Escapade en Beaujolais",
+    "name": "Rémi",
+    "city": "Strasbourg",
+    "stay": "Avril 2025",
+    "text": "4 nuits et beaucoup de kilomètres à pied et en voiture dans la région. Belle situation pour rayonner. Le soir très appréciable de retrouver le calme du gîte."
+  },
+  {
+    "score": 10,
+    "title": "Tout était parfait",
+    "name": "Émilie",
+    "city": "Besançon",
+    "stay": "Février 2025",
+    "text": "Propreté irréprochable, maison chaleureuse, lit très confortable. Merci encore pour votre gentillesse et votre souplesse pour notre arrivée."
+  },
+  {
+    "score": 9,
+    "title": "Séjour familial",
+    "name": "Patrick",
+    "city": "Toulouse",
+    "stay": "Décembre 2024",
+    "text": "Nous étions venus voir nos enfants installés dans la région. Très pratique pour 5 personnes et bien plus convivial que de prendre plusieurs chambres d'hôtel. Tout s'est bien passé."
+  },
+  {
+    "score": 10,
+    "title": "Un vrai charme",
+    "name": "Sylvie",
+    "city": "Aix-en-Provence",
+    "stay": "Novembre 2024",
+    "text": "J'ai particulièrement aimé l'intérieur. On voit que la maison n'a pas été aménagée uniquement pour faire de la location, il y a une ambiance, des objets, quelque chose de vivant. Et en plus c'est très propre."
+  },
+  {
+    "score": 8,
+    "title": "Bien situé",
+    "name": "Jérôme",
+    "city": "Reims",
+    "stay": "Octobre 2024",
+    "text": "Bonne base pour découvrir les villages du Beaujolais. Nous avons peu utilisé le logement à part le soir et pour dormir mais il correspondait bien à ce qui était annoncé."
+  },
+  {
+    "score": 10,
+    "title": "Les vendanges",
+    "name": "Isabelle",
+    "city": "Nîmes",
+    "stay": "Septembre 2024",
+    "text": "Nous sommes tombés en pleine période des vendanges, il y avait de l'animation partout dans les vignes. Très chouette ambiance. Le village est joli et le gîte encore mieux que sur les photos selon nous."
+  },
+  {
+    "score": 10,
+    "title": "Wonderful stay",
+    "name": "Rachel",
+    "city": "Boston",
+    "stay": "Août 2024",
+    "text": "We spent four nights here during a longer trip through France. The house has a lot of character and was spotlessly clean. Very comfortable beds too. We especially loved driving through the vineyards and discovering the small villages."
+  },
+  {
+    "score": 9,
+    "title": "Très reposant",
+    "name": "Gilles",
+    "city": "Caen",
+    "stay": "Août 2024",
+    "text": "Une semaine tranquille, c'était le but. On a bien profité de la région et du gite. La clim est un vrai plus en été."
+  },
+  {
+    "score": 10,
+    "title": "Superbe région",
+    "name": "Nathalie",
+    "city": "Lille",
+    "stay": "Juillet 2024",
+    "text": "Nous avons beaucoup plus parlé du Beaujolais que du logement en rentrant tellement la région nous a plu ! Vignes à perte de vue, petits villages, de très bons restaurants. Pour le logement rien à dire, très propre et confortable."
+  },
+  {
+    "score": 9,
+    "title": "Nickel",
+    "name": "Alexandre",
+    "city": "Saint-Étienne",
+    "stay": "Juillet 2024",
+    "text": "2 nuits pour un mariage. Tout nickel. On a dormi comme des pierres."
+  },
+  {
+    "score": 10,
+    "title": "Très belle maison",
+    "name": "Agnès",
+    "city": "Versailles",
+    "stay": "Juin 2024",
+    "text": "J'ai rarement vu un gîte aussi propre. Les chambres sont spacieuses, beaucoup de rangements et une literie de qualité. Nous étions avec mes parents qui ont également beaucoup apprécié le calme."
+  },
+  {
+    "score": 9,
+    "title": "Belle parenthèse",
+    "name": "Stéphanie",
+    "city": "Poitiers",
+    "stay": "Mai 2024",
+    "text": "On voulait souffler trois jours et marcher un peu. Contrat rempli. Des chemins et des paysages superbes tout autour. Accueil très agréable."
+  },
+  {
+    "score": 10,
+    "title": "Una casa con encanto",
+    "name": "Marta",
+    "city": "Barcelona",
+    "stay": "Avril 2024",
+    "text": "La casa es muy bonita y tiene mucha personalidad. Todo estaba muy limpio y las camas son cómodas. Nos encantó también la zona, los viñedos y los pequeños pueblos. Muy recomendable."
+  },
+  {
+    "score": 9,
+    "title": "Bonne adresse",
+    "name": "Bruno",
+    "city": "Limoges",
+    "stay": "Mars 2024",
+    "text": "Gite fonctionnel, spacieux et accueil agréable. Pas de mauvaise surprise, au contraire."
+  },
+  {
+    "score": 9,
+    "title": "En famille",
+    "name": "Delphine",
+    "city": "Avignon",
+    "stay": "Octobre 2023",
+    "text": "Séjour avec nos deux filles pour visiter la région. Elles ont aimé la maison et nous le calme ! Très jolie balade dans Salles et autour."
+  },
+  {
+    "score": 10,
+    "title": "Un régal",
+    "name": "Alain",
+    "city": "Lorient",
+    "stay": "Septembre 2023",
+    "text": "Le Beaujolais en septembre c'est formidable. Nous sommes amateurs de vin donc autant dire que nous avons trouvé de quoi nous occuper... Très bon retour au calme le soir. Merci aux propriétaires pour leurs conseils et leur accueil."
+  },
+  {
+    "score": 8,
+    "title": "Très correct",
+    "name": "Vincent",
+    "city": "Nice",
+    "stay": "Août 2023",
+    "text": "Maison grande et propre. Bonne literie et clim bienvenue vu la température. Séjour sans problème."
+  },
+  {
+    "score": 10,
+    "title": "Nos premières vacances ici",
+    "name": "Mélanie",
+    "city": "Chartres",
+    "stay": "Août 2023",
+    "text": "Nous ne connaissions absolument pas Salles-Arbuissonnas et avons choisi presque uniquement à cause des photos. Aucun regret. Le centre du village est adorable, le cloître mérite la visite et tout autour c'est les vignes. Les enfants ont demandé si on pouvait revenir l'année prochaine..."
+  },
+  {
+    "score": 10,
+    "title": "Hermoso lugar",
+    "name": "Valentina",
+    "city": "Buenos Aires",
+    "stay": "Juillet 2023",
+    "text": "Pasamos cinco días maravillosos aquí. La casa es grande, tranquila y muy cómoda. Nos recibió una familia muy amable. El paisaje de Beaujolais nos encantó, especialmente los viñedos y los pueblos pequeños."
+  },
+  {
+    "score": 9,
+    "title": "Agréable",
+    "name": "Thierry",
+    "city": "Nancy",
+    "stay": "Juillet 2023",
+    "text": "RAS, agréable, propre et calme. On recommande sans hésiter."
+  },
+  {
+    "score": 10,
+    "title": "Un petit bonheur",
+    "name": "Corinne",
+    "city": "Pau",
+    "stay": "Juin 2023",
+    "text": "Prendre son café dehors le matin dans le calme, partir se promener au milieu des vignes puis rentrer dans cette jolie maison... il ne nous en fallait pas beaucoup plus. Nous avons passé quatre jours formidables."
+  },
+  {
+    "score": 9,
+    "title": "Très sympa",
+    "name": "Nicolas",
+    "city": "Valence",
+    "stay": "Mai 2023",
+    "text": "Bon accueil, appartement maison très spacieux, tout est propre. Nous avons apprécié de pouvoir garer la voiture facilement. A refaire."
+  },
+  {
+    "score": 10,
+    "title": "Pâques dans le Beaujolais",
+    "name": "Carole",
+    "city": "Épinal",
+    "stay": "Avril 2023",
+    "text": "Réservation faite assez tardivement pour le week-end de Pâques. Nous avons été très bien accueillis malgré notre arrivée un peu décalée. Maison confortable et particulièrement propre. Très joli coin."
+  },
+  {
+    "score": 9,
+    "title": "On reviendra",
+    "name": "Ludovic",
+    "city": "Lyon",
+    "stay": "Mars 2023",
+    "text": "A moins d'une heure de chez nous et pourtant dépaysement total. Bon weekend, bonne bouteille et bonne nuit, que demander de plus ?"
+  },
+  {
+    "score": 10,
+    "title": "Séjour de fin d'année",
+    "name": "Fabienne",
+    "city": "Bourges",
+    "stay": "Décembre 2022",
+    "text": "Maison accueillante et confortable pour passer quelques jours avec nos enfants. Nous avons particulièrement apprécié l'espace et la propreté. Tout le monde a bien dormi."
+  },
+  {
+    "score": 9,
+    "title": "Très beau Beaujolais",
+    "name": "Denis",
+    "city": "Amiens",
+    "stay": "Octobre 2022",
+    "text": "Je connaissais Lyon mais pas du tout le Beaujolais. Les couleurs des vignes étaient superbes. Nous avons fait de belles balades et visité plusieurs villages. Bon gîte pour découvrir le secteur."
+  },
+  {
+    "score": 10,
+    "title": "Tout simplement bien",
+    "name": "Christine",
+    "city": "Genève",
+    "stay": "Septembre 2022",
+    "text": "Une maison où l'on se sent bien, des propriétaires charmants et une région que nous aimons toujours autant. Rien besoin de plus."
+  },
+  {
+    "score": 9,
+    "title": "Prima verblijf",
+    "name": "Jeroen",
+    "city": "Amsterdam",
+    "stay": "Août 2022",
+    "text": "Very nice house for our family. Clean, quiet and comfortable, with good air conditioning during a very hot week. Beautiful countryside and many places to visit nearby."
+  },
+  {
+    "score": 10,
+    "title": "Vacances en famille",
+    "name": "Laetitia",
+    "city": "Toulon",
+    "stay": "Août 2022",
+    "text": "Une semaine à 5 et aucune sensation d'être les uns sur les autres. Les chambres sont grandes et la maison très agréable. Nous avons fait pas mal de balades le matin et visites l'après-midi. Les vacances sont passées beaucoup trop vite..."
+  },
+  {
+    "score": 9,
+    "title": "Joli gite",
+    "name": "Didier",
+    "city": "Auxerre",
+    "stay": "Juillet 2022",
+    "text": "Joli gite, propre, calme et bien équipé. Propriétaire sympathique. Très bonne semaine."
+  },
+  {
+    "score": 10,
+    "title": "Beaucoup de charme",
+    "name": "Pauline",
+    "city": "Marseille",
+    "stay": "Juin 2022",
+    "text": "Ce qu'on a préféré c'est justement que le logement ne ressemble pas à tous les Airbnb modernes avec les mêmes meubles partout. Ici il y a du charme et une vraie ambiance. Très bon accueil en plus."
+  },
+  {
+    "score": 10,
+    "title": "Una bellissima scoperta",
+    "name": "Giulia",
+    "city": "Milano",
+    "stay": "Mai 2022",
+    "text": "Casa molto accogliente, spaziosa e pulitissima. La zona è bellissima, con vigneti e piccoli paesi da visitare. Abbiamo passato quattro giorni davvero piacevoli."
+  },
+  {
+    "score": 8,
+    "title": "Week end",
+    "name": "Sébastien",
+    "city": "Chambéry",
+    "stay": "Avril 2022",
+    "text": "Seulement 2 nuits mais séjour sympa. Très bien dormi, aucun bruit et bonne literie."
+  },
+  {
+    "score": 10,
+    "title": "L'automne dans les vignes",
+    "name": "Marie",
+    "city": "Paris",
+    "stay": "Octobre 2021",
+    "text": "Quelques jours merveilleux. Les paysages étaient magnifiques avec les vignes rouges et jaunes. Le logement est très agréable, spacieux et extrêmement propre. Accueil chaleureux sans en faire trop, comme on aime."
+  },
+  {
+    "score": 9,
+    "title": "Très bon séjour",
+    "name": "Philippe",
+    "city": "Montluçon",
+    "stay": "Août 2021",
+    "text": "Belle maison et très belle région. Le calme surtout nous a fait du bien. bonne adresse."
+  },
+  {
+    "score": 10,
+    "title": "Première fois dans le Beaujolais",
+    "name": "Amélie",
+    "city": "Lille",
+    "stay": "Juillet 2021",
+    "text": "Nous cherchions une étape de quelques jours en remontant du sud et nous sommes finalement restés presque une semaine. Un coin de France que nous ne connaissions pas du tout. Très beau village, des vignes partout et un accueil vraiment gentil. La maison était impeccable."
+  },
+    {
       "score": 10,
       "title": "Parfait",
       "name": "Françoise",

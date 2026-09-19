@@ -586,3 +586,9 @@
 .brand-mark{width:44px;height:44px;border-radius:0;background:transparent;color:inherit;display:grid;place-items:center;flex:0 0 44px}
 .brand-mark img{display:block;width:44px;height:44px;object-fit:contain}
 @media(max-width:600px){.brand-mark{width:40px;height:40px;flex-basis:40px}.brand-mark img{width:40px;height:40px}}
+
+
+/* Information sur les données personnelles du formulaire de réservation */
+.privacy-consent{display:flex;align-items:flex-start;gap:.65rem;margin:.25rem 0 .9rem;font-size:.88rem;line-height:1.45;cursor:pointer}
+.privacy-consent input[type="checkbox"]{width:18px;height:18px;min-width:18px;margin:.12rem 0 0;accent-color:currentColor;cursor:pointer}
+.privacy-consent a{text-decoration:underline;text-underline-offset:2px}

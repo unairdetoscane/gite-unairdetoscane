@@ -7,7 +7,15 @@
   <link rel="canonical" href="https://www.gite-unairdetoscane.fr/mentions-legales.html">
   <title>Mentions légales – Un air de Toscane</title>
   <link rel="icon" href="assets/favicon-prieure.png?v=445" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=454">
+  <style>
+    /* Secours spécifique page mentions légales : même navigation et pied de page que le reste du site */
+    @media (min-width:901px){.site-header .main-nav{display:flex!important}}
+    .footer .footer-grid{display:grid!important;grid-template-columns:1.4fr .5fr 1fr!important;gap:40px!important}
+    .footer .footer-bottom{display:flex!important;justify-content:space-between!important}
+    @media (max-width:900px){.site-header .main-nav{display:none!important}.site-header .main-nav.open{display:flex!important}.footer .footer-grid{grid-template-columns:1fr 1fr!important}}
+    @media (max-width:600px){.footer .footer-grid{grid-template-columns:1fr!important}.footer .footer-bottom{flex-direction:column!important;gap:6px!important}}
+  </style>
 </head>
 <body>
   <header class="site-header" id="top">

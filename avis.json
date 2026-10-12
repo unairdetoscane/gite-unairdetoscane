@@ -2,6 +2,14 @@
   "reviews": [
     {
     "score": 10,
+    "title": "Excellent séjour !",
+    "name": "Christèle",
+    "city": "Lyon",
+    "stay": "02/10/2026",
+    "text": "Nous avons loué ce gite pour compléter notre offre d'hébergement pour un séminaire associatif. Tout était parfait, propreté, charme, accueil des propriétaires. Nos hôtes ont parfaitement bien dormi et ont été enchantés ! Qui plus est, cela leur a permis de découvrir le magnifique village de Salles Arbuissonnas et son prieuré du 13ème siècle."
+  },
+    {
+    "score": 10,
     "title": "Belle découverte",
     "name": "Aurélie",
     "city": "Rennes",

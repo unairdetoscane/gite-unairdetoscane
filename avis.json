@@ -8,14 +8,6 @@
     "stay": "02/10/2026",
     "text": "Nous avons loué ce gite pour compléter notre offre d'hébergement pour un séminaire associatif. Tout était parfait, propreté, charme, accueil des propriétaires. Nos hôtes ont parfaitement bien dormi et ont été enchantés ! Qui plus est, cela leur a permis de découvrir le magnifique village de Salles Arbuissonnas et son prieuré du 13ème siècle."
   },
-    {
-    "score": 10,
-    "title": "Belle découverte",
-    "name": "Aurélie",
-    "city": "Rennes",
-    "stay": "Septembre 2026",
-    "text": "On ne connaissait absolument pas le Beaujolais en dehors du vin... grosse surprise. C'est vraiment très beau. Le gîte est grand, au calme, très bien tenu et on a très bien dormi. Merci pour les bonnes adresses aussi."
-  },
   {
     "score": 9,
     "title": "3 jours au vert",
@@ -24,6 +16,14 @@
     "stay": "Septembre 2026",
     "text": "Trois jours beaucoup trop courts. Maison agréable, propre, bonne literie. Le village est vraiment joli."
   },
+     {
+      "score": 10,
+      "title": "Excellent séjour au cœur du Beaujolais",
+      "name": "Frédérique",
+      "city": "Authume",
+      "stay": "Aout 2026",
+      "text": "Nous avons passé un très agréable séjour dans ce magnifique gîte. La maison est spacieuse, décorée avec beaucoup de goût et parfaitement équipée. Nous avons particulièrement apprécié le calme, la propreté irréprochable et la jolie cour. L’emplacement est idéal pour découvrir le Beaujolais et ses villages. Accueil chaleureux et propriétaires disponibles. Une très belle adresse que nous recommandons sans hésiter !"
+    },
   {
     "score": 10,
     "title": "Parfait en famille",
@@ -40,6 +40,14 @@
     "stay": "Août 2026",
     "text": "Très belle région. Nous avons beaucoup roulé dans les environs, Oingt, les villages, les vignes, Villefranche. Le logement nous a parfaitement convenu pour la semaine."
   },
+     {
+      "score": 10,
+      "title": "Séjour parfait",
+      "name": "Maya",
+      "city": "Lyon",
+      "stay": "Juillet 2026",
+      "text": "Nous sommes allés dans ce gîte à plusieurs reprises. C'est grand, confortable et de très bon goût. Les hôtes sont agréables et disponibles en cas de besoin. Cette partie du Beaujolais est de surcroît magnifique. Je recommande !"
+    },
   {
     "score": 10,
     "title": "Super semaine",
@@ -47,14 +55,6 @@
     "city": "Brest",
     "stay": "Juillet 2026",
     "text": "On s'est senti bien dès l'arrivée. Ce n'est pas une location froide et standardisée, il y a des meubles, des livres, une déco, bref une vraie maison. Très propre également. Les enfants ont adoré les jeux et nous les petites soirées dehors."
-  },
-  {
-    "score": 10,
-    "title": "Un très bel endroit",
-    "name": "Martin",
-    "city": "London",
-    "stay": "Juillet 2026",
-    "text": "A beautiful and very comfortable house. We stayed for five nights with our children and really enjoyed the area. Very clean, quiet at night and a warm welcome from our hosts. Beaujolais was a wonderful discovery for us."
   },
   {
     "score": 8,
@@ -151,14 +151,6 @@
     "city": "Rouen",
     "stay": "Août 2025",
     "text": "Bonne semaine dans l'ensemble. Maison agréable, climatisée, bonne literie. Très joli secteur pour qui aime les balades et le vin."
-  },
-  {
-    "score": 10,
-    "title": "On a adoré",
-    "name": "Lucie",
-    "city": "Bordeaux",
-    "stay": "Juillet 2025",
-    "text": "Alors franchement très belle surprise ! On avait surtout réservé pour être proche d'amis mais on a adoré le coin. Le petit village, les pierres, les vignes partout... et une maison où l'on se sent tout de suite bien. Merci pour l'accueil."
   },
   {
     "score": 9,
@@ -360,6 +352,14 @@
     "stay": "Mai 2023",
     "text": "Bon accueil, appartement maison très spacieux, tout est propre. Nous avons apprécié de pouvoir garer la voiture facilement. A refaire."
   },
+    {
+      "score": 10,
+      "title": "Parfait",
+      "name": "Françoise",
+      "city": "Anse",
+      "stay": "avril 2023",
+      "text": "Parfait, séjour improvisé et de dernière minute pour Pâques 2023. Joli cadre, intérieur chaleureux, literie impeccable, grands placards de rangement, propreté, contacts et accueil au top. Erika et Pierre Louis sont des hôtes à l'écoute et disponibles. Encore merci, nous recommandons vivement Un air de Toscane, en famille ou entre amis, pour une visite ou un séjour en Beaujolais."
+    },
   {
     "score": 10,
     "title": "Pâques dans le Beaujolais",
@@ -473,36 +473,12 @@
     "text": "Nous cherchions une étape de quelques jours en remontant du sud et nous sommes finalement restés presque une semaine. Un coin de France que nous ne connaissions pas du tout. Très beau village, des vignes partout et un accueil vraiment gentil. La maison était impeccable."
   },
     {
-      "score": 10,
-      "title": "Parfait",
-      "name": "Françoise",
-      "city": "Anse",
-      "stay": "avril 2023",
-      "text": "Parfait, séjour improvisé et de dernière minute pour Pâques 2023. Joli cadre, intérieur chaleureux, literie impeccable, grands placards de rangement, propreté, contacts et accueil au top. Erika et Pierre Louis sont des hôtes à l'écoute et disponibles. Encore merci, nous recommandons vivement Un air de Toscane, en famille ou entre amis, pour une visite ou un séjour en Beaujolais."
-    },
-    {
       "score": 9,
       "title": "Séjour",
       "name": "Noëlle",
       "city": "Saint-Julien",
       "stay": "octobre 2021",
       "text": "Très bon accueil, logement fonctionnel et propre. À recommander."
-    },
-     {
-      "score": 10,
-      "title": "Séjour parfait",
-      "name": "Maya",
-      "city": "Lyon",
-      "stay": "Juillet 2026",
-      "text": "Nous sommes allés dans ce gîte à plusieurs reprises. C'est grand, confortable et de très bon goût. Les hôtes sont agréables et disponibles en cas de besoin. Cette partie du Beaujolais est de surcroît magnifique. Je recommande !"
-    },
-     {
-      "score": 10,
-      "title": "Excellent séjour au cœur du Beaujolais",
-      "name": "Frédérique",
-      "city": "Authume",
-      "stay": "Aout 2026",
-      "text": "Nous avons passé un très agréable séjour dans ce magnifique gîte. La maison est spacieuse, décorée avec beaucoup de goût et parfaitement équipée. Nous avons particulièrement apprécié le calme, la propreté irréprochable et la jolie cour. L’emplacement est idéal pour découvrir le Beaujolais et ses villages. Accueil chaleureux et propriétaires disponibles. Une très belle adresse que nous recommandons sans hésiter !"
     }
   ]
 }
